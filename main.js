@@ -11,8 +11,8 @@ const beforemap = new mapboxgl.Map({
     container: 'before',
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
     style: 'mapbox://styles/mapbox/streets-v12',
-    center: [-104.5917, 40],
-    zoom: 11,
+    center: [-105, 40],
+    zoom: 8,
     projection: project
 });
 beforemap.setMaxBounds(bounds);
@@ -142,8 +142,8 @@ beforemap.setMaxBounds(bounds);
     const aftermap = new mapboxgl.Map({
         container: 'after',
         style: 'mapbox://styles/mapbox/streets-v12',
-        center: [-104.5917, 40],
-        zoom: 11,
+        center: [-105, 40],
+        zoom: 8,
         projection: project
         });
     aftermap.setMaxBounds(bounds);
