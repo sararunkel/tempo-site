@@ -1,0 +1,133 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.source {
+    color: gray;
+}
+
+#no2 {
+    align-content: flex-start;
+    padding: 4px;
+    border: 2px solid rgba(47, 47, 131, 1.00);
+}
+
+body * {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.border {
+    border-width: 3px;
+    border-style: solid;
+    border-color: #003665;
+}
+
+.map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.session {
+    margin-bottom: 20px;
+}
+
+.row {
+    height: 12px;
+    width: 100%;
+}
+
+.colors {
+    background: linear-gradient(to right, #5CB946, #99d15a, #bbdf52, #dbed47, #fbfb39, #f7c004, #df860c, #be4e0f, #97000e);
+    margin-bottom: 5px;
+}
+
+.label {
+    width: 15%;
+    display: inline-block;
+    text-align: center;
+}
+
+.col {
+    height: 12px;
+    width: 100%;
+}
+
+.demos {
+    background: linear-gradient(to right, #ffffe0, #abdad9, #7daeca, #5681b9, #2b57a7, #00429d);
+    margin-bottom: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: #2dc4b2;
+}
+
+#console {
+    position: absolute;
+    width: 280px;
+    height: 95%;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: white;
+    overflow-y: auto;
+    border-radius: 5px;
+}
+
+.listing-group {
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    border-radius: 3px;
+    max-width: 20%;
+    color: black;
+}
+
+.listing-group input[type='checkbox']:first-child + label {
+    border-radius: 3px 3px 0 0;
+}
+
+.listing-group label:last-child {
+    border-radius: 0 0 3px 3px;
+    border: none;
+}
+
+.listing-group input[type='checkbox'] {
+    display: none;
+}
+
+.listing-group input[type='checkbox'] + label {
+    background-color: white;
+    display: block;
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    text-transform: capitalize;
+}
+
+.listing-group input[type='checkbox'] + label:hover,
+.listing-group input[type='checkbox']:checked + label {
+    background-color: whitesmoke;
+}
+
+.listing-group input[type='checkbox']:checked + label:before {
+    content: '✔';
+    margin-right: 5px;
+}
