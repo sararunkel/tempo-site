@@ -1,0 +1,55 @@
+name: "dm-2024"
+channels:
+    - "conda-forge"
+    - "nodefaults"
+
+dependencies:
+  - python
+  - pip
+  # Core scientific python
+  - numpy
+  - pyqt
+  - tqdm
+  - kiwisolver
+  
+  # Plotting
+  - matplotlib
+  - plotly
+  - seaborn
+
+  # Spatial packages
+  - pysal
+  - pyproj>=3.0
+  - geopy
+  - cartopy
+  - descartes
+  - contextily
+  - earthpy
+  - geojson
+  - mapboxgl
+  - geocoder
+  - xarray
+  - rioxarray>=0.3.0
+  - scipy
+  - netcdf4
+  - nc-time-axis
+  - regionmask
+  - pandas
+  - fiona
+  - geopandas
+
+  # Natural language processing
+  - nltk
+  - textblob
+
+  # Jupyter Environment
+  - papermill
+  - autopep8
+  - jupyterlab
+  - notebook
+  - ipython
+  - jupyter_contrib_nbextensions
+  - nbclean
+  - nbresuse
+-pip: 
+  - pandas-geojson
