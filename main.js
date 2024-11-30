@@ -2,7 +2,7 @@ const zoomThresh = 5;
 const firstSymbolId = 'bridge-rail';//'road-simple'; 
 const firstSymbolId2 = 'bridge-rail';//'road-simple';
 const project ='albers'
-let STOPS = [
+const STOPS = [
     [0, '#0a62c0'],
     [1, '#6ed4fc'],
     [2, '#a0ffb8'],
@@ -17,6 +17,31 @@ const bounds = [
     [-106.08195926, 38.8791579], // Southwest coordinates
     [-103.95380958, 40.73862622] // Northeast coordinates
     ];
+
+
+
+let leftData = 'data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_012024_15Z_V3.geojson';
+let rightData = 'data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_012024_22Z_V3.geojson';
+
+function updateData() {
+    const month = document.getElementById('month-slider').ej2_instances[0].value.toString().padStart(2, '0');
+    let hour = document.getElementById('time-slider').ej2_instances[0].value 
+    hour = (hour + 7) % 24; // Convert MST to UTC
+    hour = hour.toString().padStart(2, '0'); ///.toString().padStart(2, '0');
+    console.log('Month:', month, 'Hour:', hour);
+    const selectedMap = document.querySelector('input[name="mapSelector"]:checked').value;
+    if (selectedMap === 'left') {
+        leftData = `data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_${month}2024_${hour}Z_V3.geojson`;
+        beforemap.getSource('us-data').setData(leftData);
+    } else {
+        rightData = `data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_${month}2024_${hour}Z_V3.geojson`;
+        aftermap.getSource('us-data').setData(rightData);
+    }
+}
+
+function updateHourValue(value) {
+    document.getElementById('hour-value').textContent = value;
+}
 mapboxgl.accessToken = 'pk.eyJ1Ijoic3J1bmtlbCIsImEiOiJjbGRrZmdyc3cxbWxmM29udWd6cHZqeXA0In0.KDgLcBpTZkKMYMVcoory4Q';
 const beforemap = new mapboxgl.Map({
     container: 'before',
@@ -39,7 +64,7 @@ beforemap.setMaxBounds(bounds);
         tolerance:0.1,
         // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
         // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-        data: 'data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_012024_15Z_V3.geojson',
+        data: leftData,
         //data: 'https://raw.githubusercontent.com/anenbergresearch/AQ-Files/main/tropomi-county-demographics.geojson',
         generateId:true
         // Radius of each cluster when clustering points (defaults to 50)
@@ -145,7 +170,7 @@ beforemap.setMaxBounds(bounds);
         type: 'geojson',
         tolerance:0.1,       // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
         // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-        data: 'data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_012024_22Z_V3.geojson',
+        data: rightData,//'data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_012024_22Z_V3.geojson',
         generateId:true
         // Radius of each cluster when clustering points (defaults to 50)
     })

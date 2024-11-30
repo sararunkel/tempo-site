@@ -5,10 +5,17 @@
 <title>Swipe between maps</title>
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
+<link href="https://cdn.syncfusion.com/ej2/27.2.2/ej2-base/styles/material.css" rel="stylesheet">
+    <link href="https://cdn.syncfusion.com/ej2/27.2.2/ej2-inputs/styles/material.css" rel="stylesheet">
+    <link href="https://cdn.syncfusion.com/ej2/27.2.2/ej2-popups/styles/material.css" rel="stylesheet">
+    <link href="https://cdn.syncfusion.com/ej2/27.2.2/ej2-buttons/styles/material.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.js"></script>
+<script src="https://cdn.syncfusion.com/ej2/27.2.2/dist/ej2.min.js" type="text/javascript"></script>
+<script src="https://cdn.syncfusion.com/ej2/syncfusion-helper.js" type ="text/javascript"></script>
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.css" type="text/css">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="components.css">
 <div id="comparison-container">
 <div id="before" class="map"></div>
 <div id="after" class="map"></div>
@@ -31,17 +38,42 @@
 <div class="row colors">
 </div>
   <div class="row labels">
-    <div class="label">0</div>
     <div class="label">1</div>
     <div class="label">2</div>
     <div class="label">3</div>
 	<div class="label">5</div>
-    <div class="label">6+</div>
+    <div class="label">6</div>
+    <div class="label">7+</div>
   </div> 
  </div>
+<div class="wrap">
+
+
+ <div class="slider-container">
+  <!-- add label for slider -->
+  <label for="month-slider">Month Slider</label>
+  <div id="month-slider"></div>
+  <label for="time-slider">Time Slider (MST)</label>
+  <div id="time-slider"></div>
+  <div class="selector-container">
+    <label>Select Map:</label>
+    <div>
+        <input type="radio" id="leftMap" name="mapSelector" value="left" checked>
+        <label for="leftMap" class="button">Left Map</label>
+        <input type="radio" id="rightMap" name="mapSelector" value="right">
+        <label for="rightMap" class="button">Right Map</label>
+    </div>
+</div>
+  
+  <!-- Time slider -->
+</div>
+</div>
   <p class="source"><strong>Source:</strong><em> <a href="https://tempo.si.edu/data_for_public.html">TEMPO</a></em> 0.01&#176; regridded data from 2024</p>
 </div>
+</div>
+  
 	<script src="main.js"></script>
+  <script src="components.js"></script>
 
 </body>
 </html>
