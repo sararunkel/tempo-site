@@ -1,6 +1,17 @@
 const zoomThresh = 5;
-const firstSymbolId = 'ferry';//'road-simple'; 
+const firstSymbolId = 'bridge-rail';//'road-simple'; 
+const firstSymbolId2 = 'bridge-rail';//'road-simple';
 const project ='albers'
+let STOPS = [
+    [0, '#0a62c0'],
+    [1, '#6ed4fc'],
+    [2, '#a0ffb8'],
+    [3, '#fff837'],
+    [4, '#ffa646'],
+    [5, '#d05134'],
+    [6, '#75001d'],
+    [7, '#4e0014']
+];
     //'admin-1-boundary';
 const bounds = [
     [-106.08195926, 38.8791579], // Southwest coordinates
@@ -10,7 +21,7 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoic3J1bmtlbCIsImEiOiJjbGRrZmdyc3cxbWxmM29udWd6c
 const beforemap = new mapboxgl.Map({
     container: 'before',
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-    style: 'mapbox://styles/mapbox/streets-v12',
+    style: 'mapbox://styles/mapbox/light-v11', //'mapbox://styles/mapbox/streets-v12',
     center: [-105, 40],
     zoom: 8,
     projection: project
@@ -19,7 +30,6 @@ beforemap.setMaxBounds(bounds);
     let hoveredStateId = null;
     beforemap.on('load', () => {
         const layers = beforemap.getStyle().layers;
-        console.log(layers);
 
     // Add a new source from our GeoJSON data and
     // set the 'cluster' option to true. GL-JS will
@@ -29,7 +39,7 @@ beforemap.setMaxBounds(bounds);
         tolerance:0.1,
         // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
         // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-        data: 'data/HAQ_TEMPO_NO2_CONUS_QA75_L3_Summer2024_9AM_V3.geojson',
+        data: 'data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_012024_15Z_V3.geojson',
         //data: 'https://raw.githubusercontent.com/anenbergresearch/AQ-Files/main/tropomi-county-demographics.geojson',
         generateId:true
         // Radius of each cluster when clustering points (defaults to 50)
@@ -50,27 +60,7 @@ beforemap.setMaxBounds(bounds);
         'minzoom':5,
         'paint': {
         'fill-color': {property: 'field_avg',
-                        stops:[
-                            [0,
-                            '#5CB946'],
-                            [0.5,
-                            '#99d15a'],
-                            [1,
-                            '#bbdf52'],
-                            [1.5,
-                            '#dbed47'],
-                            [2,
-                            '#fbfb39'],
-                            [2.5,
-                            '#f7c004'],
-                            [4,
-                            '#df860c'],
-                            [5,
-                            '#be4e0f'],
-                            [6,
-                            '#97000e'],
-                            [7,'#441D14' 
-                            ]]},
+                        stops: STOPS},
                        
         //'fill-outline-color': 'rgba(200, 100, 240, 1)'
         }
@@ -105,7 +95,6 @@ beforemap.setMaxBounds(bounds);
                     }
 
                     //e.layer.getBounds().getCenter()
-                console.log(e.features[0])        
                 hoveredStateId = e.features[0].id
                 beforemap.setFeatureState(
                     { source: 'us-data', id: hoveredStateId },
@@ -141,13 +130,14 @@ beforemap.setMaxBounds(bounds);
             // previously hovered feature.
     const aftermap = new mapboxgl.Map({
         container: 'after',
-        style: 'mapbox://styles/mapbox/streets-v12',
+        style: 'mapbox://styles/mapbox/dark-v11',
         center: [-105, 40],
         zoom: 8,
         projection: project
         });
     aftermap.setMaxBounds(bounds);
     aftermap.on('load', () => {
+        const layers = aftermap.getStyle().layers;
     // Add a new source from our GeoJSON data and
     // set the 'cluster' option to true. GL-JS will
     // add the point_count property to your source data.
@@ -155,7 +145,7 @@ beforemap.setMaxBounds(bounds);
         type: 'geojson',
         tolerance:0.1,       // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
         // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-        data: 'data/HAQ_TEMPO_NO2_CONUS_QA75_L3_Summer2024_5PM_V3.geojson',
+        data: 'data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_012024_22Z_V3.geojson',
         generateId:true
         // Radius of each cluster when clustering points (defaults to 50)
     })
@@ -178,31 +168,11 @@ beforemap.setMaxBounds(bounds);
         'source': 'us-data',
         'paint': {
         'fill-color': {property: 'field_avg', 
-            stops:[
-                [0,
-                '#5CB946'],
-                [0.5,
-                '#99d15a'],
-                [1,
-                '#bbdf52'],
-                [1.5,
-                '#dbed47'],
-                [2,
-                '#fbfb39'],
-                [2.5,
-                '#f7c004'],
-                [4,
-                '#df860c'],
-                [5,
-                '#be4e0f'],
-                [6,
-                '#97000e'],
-                [7,'#441D14' 
-                ]]},
+            stops:STOPS},
                        
         //'fill-outline-color': 'rgba(200, 100, 240, 1)'
         }
-        },firstSymbolId);
+        },firstSymbolId2);
         aftermap.addLayer({
             'id': 'tract-lines',
             'type': 'line',
@@ -271,15 +241,13 @@ beforemap.setMaxBounds(bounds);
     document.getElementById('listing-group').addEventListener('change', (e) => {
         const handler = e.target.id;
         if (e.target.checked) {
-            const firstSymbolId = 'ferry';
-            beforemap.moveLayer('county-layer', firstSymbolId)
-            aftermap.moveLayer('county-layer', firstSymbolId),
+            const firstSymbolId = 'bridge-rail';//'ferry';
+            const firstSymbolId2 = 'bridge-rail';
             beforemap.moveLayer('tract-layer', firstSymbolId)
-            aftermap.moveLayer('tract-layer', firstSymbolId)
+            aftermap.moveLayer('tract-layer', firstSymbolId2)
             } else {
             const firstSymbolId = 'admin-1-boundary-bg';
-            beforemap.moveLayer('county-layer', firstSymbolId)
-            aftermap.moveLayer('county-layer', firstSymbolId),
+
             beforemap.moveLayer('tract-layer', firstSymbolId)
             aftermap.moveLayer('tract-layer', firstSymbolId)
         }

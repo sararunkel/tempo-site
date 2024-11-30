@@ -52,7 +52,7 @@ body * {
 }
 
 .colors {
-    background: linear-gradient(to right, #5CB946, #99d15a, #bbdf52, #dbed47, #fbfb39, #f7c004, #df860c, #be4e0f, #97000e);
+    background: linear-gradient(to right, #0a62c0, #6ed4fc, #a0ffb8, #fff837, #ffa646, #d05134, #75001d,#4e0014);
     margin-bottom: 5px;
 }
 
@@ -68,7 +68,7 @@ body * {
 }
 
 .demos {
-    background: linear-gradient(to right, #ffffe0, #abdad9, #7daeca, #5681b9, #2b57a7, #00429d);
+    background: linear-gradient(to right, #0052a9, #4bccff, #a9ffd4, #fcfccd, #ffa646, #d05134, #75001d);
     margin-bottom: 5px;
 }
 
