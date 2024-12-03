@@ -16,9 +16,10 @@
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.css" type="text/css">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="components.css">
+
 <div id="comparison-container">
-<div id="before" class="map"></div>
-<div id="after" class="map"></div>
+  <div id="before" class="map"></div>
+  <div id="after" class="map"></div>
 </div>
 <nav id="listing-group" class="listing-group">
 <input type="checkbox" id="roadways" checked="checked">
@@ -28,19 +29,28 @@
   <h1>NO<sub>2</sub> Morning and Evening</h1>
 	<hr>
   <div>
-	  <p align="justify" style="padding-left: 4px;color:rgba(71,71,71,1.00)" >   Move the slider to compare NO<sub>2</sub> at 9am (left) and 5pm (right) for Summer 2024.
-		 Zoom in for data on the census tract level. Hover over map for exact values.</p>
-  </div>
+    <p align="justify" style="padding-left: 4px;color:rgba(71,71,71,1.00)">Use the sliders to select the month and time to compare NO<sub>2</sub> levels. You can choose to change the data on either the left or right map. Hover over the map for exact values.</p>
 	<hr>
   <div id="poc"><p> </p></div>
 <div class="session">
   <h3>NO<sub>2</sub> (<em>10</em><sup>15</sup><em>molec/cm</em><sup>2</sup>)</h3>
-<div class="row colors">
+<div class="row colors"></div>
+<div class="ticks">
+  <div class="tick"></div>
+  <div class="tick"></div>
+  <div class="tick"></div>
+  <div class="tick"></div>
+  <div class="tick"></div>
+  <div class="tick"></div>
+  <div class="tick"></div>
+  <div class="tick"></div>
 </div>
-  <div class="row labels">
+  <div class="labels">
+    <div class="label">0</div>
     <div class="label">1</div>
     <div class="label">2</div>
     <div class="label">3</div>
+    <div class="label">4</div>
 	<div class="label">5</div>
     <div class="label">6</div>
     <div class="label">7+</div>
@@ -51,11 +61,13 @@
 
  <div class="slider-container">
   <!-- add label for slider -->
-  <label for="month-slider">Month Slider</label>
+  <label for="month-slider">Month</label>
   <div id="month-slider"></div>
-  <label for="time-slider">Time Slider (MST)</label>
+  <label for="time-slider">Time (MST)</label>
   <div id="time-slider"></div>
   <div class="selector-container">
+
+    
     <label>Select Map:</label>
     <div>
         <input type="radio" id="leftMap" name="mapSelector" value="left" checked>
@@ -63,6 +75,10 @@
         <input type="radio" id="rightMap" name="mapSelector" value="right">
         <label for="rightMap" class="button">Right Map</label>
     </div>
+    <div class="DateTime-container">
+      <div id="before-label" class="map-label">Jan 8 AM</div>
+      <div id="after-label" class="map-label"> Jan 3 PM</div>
+  </div>
 </div>
   
   <!-- Time slider -->

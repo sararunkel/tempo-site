@@ -3,16 +3,17 @@
 //dictionary with the slider values
 var SliderValues = {'01': [8, 9, 10, 11, 12, 13, 14, 15],
  '02': [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
- '03': [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+ '03': [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
  '04': [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
- '05': [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
- '06': [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+ '05': [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+ '06': [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
  '07': [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
  '08': [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
  '09': [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
  '10': [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
  '11': [7, 8, 9, 10, 11, 12, 13, 14, 15],
  '12': [8, 9, 10, 11, 12, 13, 14, 15]}
+ let timeLabels = ['8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM',];
 
  // Initialize Slider for the month
 var monthObj = new ej.inputs.Slider({
@@ -24,12 +25,22 @@ var monthObj = new ej.inputs.Slider({
     max: 12,
     // Slider current value
     value: 1,
+    renderingTicks: function (args) {
+        // Month Array
+        var monthArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        // Ensure args.value is valid
+        if (args.value !== undefined && args.value >= 1 && args.value <= 12) {
+            args.text = monthArr[args.value - 1];
+        } else {
+            args.text = '';
+        }
+    },
     change: updateTimeSlider
 });
 monthObj.appendTo('#month-slider');
 
 var rangeObj = new ej.inputs.Slider({
-    ticks: { placement: 'After', largeStep: 1, smallStep: 1, showSmallTicks: true },
+    ticks: { placement: 'After', largeStep: 2, smallStep: 1, showSmallTicks: true },
     tooltip: { placement: 'Before', isVisible: true, showOn: 'Always' },
     // Minimum value
     min: 8,
@@ -37,6 +48,14 @@ var rangeObj = new ej.inputs.Slider({
     max: 15,
     // Slider current value
     value: 8,
+    renderingTicks: function (args) {
+        // Use the timeLabels array to display the correct labels
+        if (args.value !== undefined && args.value >= rangeObj.min && args.value <= rangeObj.max) {
+            args.text = timeLabels[args.value - rangeObj.min];
+        } else {
+            args.text = '';
+        }
+    },
     change: updateData
 });
 // Render initialized Slider
@@ -46,6 +65,10 @@ rangeObj.appendTo('#time-slider');
 function updateTimeSlider(args) {
     var month = args.value.toString().padStart(2, '0');
     var timeValues = SliderValues[month];
+    // Create a string array of time values in AM/PM format
+    timeLabels = timeValues.map(function(value) {
+        return (value === 12 ? 12 : value % 12) + (value < 12 ? ' AM' : ' PM');
+    });
     rangeObj.min = Math.min(...timeValues);
     rangeObj.max = Math.max(...timeValues);
     rangeObj.value = rangeObj.min;

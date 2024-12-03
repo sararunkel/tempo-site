@@ -3,14 +3,14 @@ const firstSymbolId = 'bridge-rail';//'road-simple';
 const firstSymbolId2 = 'bridge-rail';//'road-simple';
 const project ='albers'
 const STOPS = [
-    [0, '#0a62c0'],
-    [1, '#6ed4fc'],
-    [2, '#a0ffb8'],
-    [3, '#fff837'],
-    [4, '#ffa646'],
-    [5, '#d05134'],
-    [6, '#75001d'],
-    [7, '#4e0014']
+    0, '#0a62c0',
+    1, '#6ed4fc',
+    2, '#a0ffb8',
+    3, '#fff837',
+    4, '#ffa646',
+    5, '#d05134',
+    6, '#75001d',
+    7, '#4e0014'
 ];
     //'admin-1-boundary';
 const bounds = [
@@ -22,21 +22,37 @@ const bounds = [
 
 let leftData = 'data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_012024_15Z_V3.geojson';
 let rightData = 'data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_012024_22Z_V3.geojson';
-
+// Function to update the labels
+function updateLabels(side) {
+    const monthArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const monthLabel = monthArr[monthObj.value - 1];
+    const timeLabel = timeLabels[rangeObj.value - rangeObj.min];
+    if (side === 'left') {
+        document.getElementById('before-label').textContent = `${monthLabel} ${timeLabel}`;
+    } else {
+    document.getElementById('after-label').textContent = `${monthLabel} ${timeLabel}`;}
+}
 function updateData() {
-    const month = document.getElementById('month-slider').ej2_instances[0].value.toString().padStart(2, '0');
+    let month = document.getElementById('month-slider').ej2_instances[0].value;
+    let year = '2024'
+    if (month >8){
+        year='2023'
+    }
+    month = month.toString().padStart(2, '0');
     let hour = document.getElementById('time-slider').ej2_instances[0].value 
     hour = (hour + 7) % 24; // Convert MST to UTC
     hour = hour.toString().padStart(2, '0'); ///.toString().padStart(2, '0');
     console.log('Month:', month, 'Hour:', hour);
     const selectedMap = document.querySelector('input[name="mapSelector"]:checked').value;
     if (selectedMap === 'left') {
-        leftData = `data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_${month}2024_${hour}Z_V3.geojson`;
+        leftData = `data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_${month}${year}_${hour}Z_V3.geojson`;
+        console.log(leftData)
         beforemap.getSource('us-data').setData(leftData);
     } else {
-        rightData = `data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_${month}2024_${hour}Z_V3.geojson`;
+        rightData = `data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_${month}${year}_${hour}Z_V3.geojson`;
         aftermap.getSource('us-data').setData(rightData);
     }
+    updateLabels(selectedMap);
 }
 
 function updateHourValue(value) {
@@ -84,12 +100,16 @@ beforemap.setMaxBounds(bounds);
         'source': 'us-data',
         'minzoom':5,
         'paint': {
-        'fill-color': {property: 'field_avg',
-                        stops: STOPS},
-                       
+            'fill-color': [
+                'case',
+                ['==', ['get', 'field_avg'], null], // Check if 'field_avg' is null
+                'rgba(0, 0, 0, 0)', // Set to transparent if null
+                ['interpolate', ['linear'], ['get', 'field_avg'], ...STOPS] // Use the stops for other values
+            ],
+        }             
         //'fill-outline-color': 'rgba(200, 100, 240, 1)'
         }
-        }, firstSymbolId);
+        , firstSymbolId);
 
         beforemap.addLayer({
             'id': 'tract-lines',
@@ -192,11 +212,13 @@ beforemap.setMaxBounds(bounds);
         'type': 'fill',
         'source': 'us-data',
         'paint': {
-        'fill-color': {property: 'field_avg', 
-            stops:STOPS},
-                       
-        //'fill-outline-color': 'rgba(200, 100, 240, 1)'
-        }
+            'fill-color': [
+                'case',
+                ['==', ['get', 'field_avg'], null], // Check if 'field_avg' is null
+                'rgba(0, 0, 0, 0)', // Set to transparent if null
+                ['interpolate', ['linear'], ['get', 'field_avg'], ...STOPS] // Use the stops for other values
+            ],
+        } 
         },firstSymbolId2);
         aftermap.addLayer({
             'id': 'tract-lines',

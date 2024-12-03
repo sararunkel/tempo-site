@@ -53,14 +53,36 @@ body * {
 }
 
 .colors {
-    background: linear-gradient(to right, #0a62c0, #6ed4fc, #a0ffb8, #fff837, #ffa646, #d05134, #75001d,#4e0014);
-    margin-bottom: 5px;
+    background: linear-gradient(to right, #0927a0, #59e1ff, #aeffc8, #fff947, #ff9b29, #f9525d, #850000,#320000);
+    height: 20px;
+    position: relative;
+    /* margin-bottom: 20px; */
+}
+
+.ticks {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: 0; /* Adjust to position tick marks */
+}
+
+.tick {
+    width: 1px;
+    height: 10px;
+    background: black;
+}
+
+.labels {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-top: 5px;
 }
 
 .label {
-    width: 15%;
-    display: inline-block;
-    text-align: center;
+    width: 10%;
+    /* display: inline-block; */
+    text-align: left;
 }
 
 .col {
