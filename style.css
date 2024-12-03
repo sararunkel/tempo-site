@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    
 }
 
 #map {
@@ -13,7 +14,6 @@ body {
 
 .source {
     color: gray;
-    margin-top: auto;
 }
 
 #no2 {
@@ -89,7 +89,24 @@ body * {
     height: 12px;
     width: 100%;
 }
-
+label {
+    font: 12px/20px 'Inter', sans-serif;
+    font-weight: 400;
+    color: black;
+}
+.map-label {
+    font: 12px/20px 'Inter', sans-serif;
+    font-weight: 400;
+    color: black;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+}
+.e-control-wrapper.e-slider-container .e-scale .e-tick .e-tick-value {
+    font: 8px/10px 'Inter', sans-serif;
+    font-weight: 400;
+    color: black;
+}
 .demos {
     background: linear-gradient(to right, #0052a9, #4bccff, #a9ffd4, #fcfccd, #ffa646, #d05134, #75001d);
     margin-bottom: 5px;
@@ -100,25 +117,25 @@ a {
     color: #2dc4b2;
 }
 
-#console {
-    position: absolute;
-    display:flex;
-    flex-direction: column;
-    width: 300px;
-    height: 100%;
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: white;
-    overflow-y: auto;
-    border-radius: 5px;
+/* Add font for headers */
+h1 {
+    font: 36px/40px 'Gayathri';
+    font-weight: bold;
 }
-.console-content {
-    flex: 1;
+h2 {
+    font: 24px/30px 'Gayathri';
+    font-weight: regular;
 }
-
+h3 {
+    font: 18px/18px 'Gayathri';
+    font-weight: bold;
+}
+p {
+    font: 12px/20px 'Inter', sans-serif;
+}
 .listing-group {
-    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    font-weight: 600;
+    font: 12px/20px 'Inter', sans-serif;
+    font-weight: 400;
     position: absolute;
     top: 10px;
     right: 10px;

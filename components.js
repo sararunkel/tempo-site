@@ -2,16 +2,16 @@
 
 //dictionary with the slider values
 var SliderValues = {'01': [8, 9, 10, 11, 12, 13, 14, 15],
- '02': [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+ '02': [8, 9, 10, 11, 12, 13, 14, 15, 16],
  '03': [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
  '04': [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
  '05': [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
  '06': [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
  '07': [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
- '08': [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+ '08': [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
  '09': [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
- '10': [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
- '11': [7, 8, 9, 10, 11, 12, 13, 14, 15],
+ '10': [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+ '11': [8, 9, 10, 11, 12, 13, 14, 15],
  '12': [8, 9, 10, 11, 12, 13, 14, 15]}
  let timeLabels = ['8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM',];
 
@@ -85,6 +85,27 @@ mapSelector.forEach(function(radio) {
     });
 });
 
+document.querySelector('.console-header').addEventListener('click', function() {
+    const consoleContent = document.querySelector('.console-content');
+    consoleContent.style.display = consoleContent.style.display === 'none' ? 'block' : 'none';
+    const console = document.getElementById('console');
+    console.classList.toggle('console-collapsed');
+    console.classList.toggle('console-expanded');
+});
+
+document.getElementById('census').addEventListener('change', function() {
+    const dropdownContainer = document.getElementById('census-dropdown-container');
+    const selectorContainer = document.querySelector('.selector-container');
+    if (this.checked) {
+        console.log('Using census dat')
+        dropdownContainer.style.display = 'block';
+        selectorContainer.classList.add('hidden');
+        document.querySelector('input[name="mapSelector"][value="left"]').checked = true;
+    } else {
+        dropdownContainer.style.display = 'none';
+        selectorContainer.classList.remove('hidden');
+    }
+});
 // // Add event listeners to the sliders
 // document.getElementById('month-slider').ej2_instances[0].change = function(args) {
 //     updateData();

@@ -66,3 +66,47 @@
     text-align: center;
     width: 90%
 }
+.mapboxgl-compare .compare-swiper-vertical {
+    background-color: 'black'
+}
+
+#console {
+    position: absolute;
+    box-shadow: inset 0 0 0 2px #fff;
+    display:flex;
+    flex-direction: column;
+    width: 300px;
+    height: fit-content;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: white;
+    overflow-y: auto;
+    border-radius: 5px;
+}
+.selector-container.hidden {
+    display: none;
+}
+.console-header {
+    cursor: pointer;
+}
+
+.console-content {
+    display: none;
+    flex: 1;
+    overflow: scroll;
+    transition: height 0.3s ease;
+}
+
+.console-collapsed .console-content {
+    height: 0;
+    padding: 0;
+}
+
+.console-expanded .console-content {
+    height: fit-content;
+    padding: 10px; /* Adjust padding as needed */
+}
+
+.console-header {
+    cursor: pointer;
+}
