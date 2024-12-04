@@ -1,27 +1,4 @@
-const zoomThresh = 5;
-const firstSymbolId = 'bridge-rail';//'road-simple'; 
-const firstSymbolId2 = 'bridge-rail';//'road-simple';
-const project ='albers'
-const STOPS = [
-    0, '#0a62c0',
-    1, '#6ed4fc',
-    2, '#a0ffb8',
-    3, '#fff837',
-    4, '#ffa646',
-    5, '#d05134',
-    6, '#75001d',
-    7, '#4e0014'
-];
-    //'admin-1-boundary';
-const bounds = [
-    [-106.08195926, 38.8791579], // Southwest coordinates
-    [-103.95380958, 40.73862622] // Northeast coordinates
-    ];
 
-
-
-let leftData = 'data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_012024_15Z_V3.geojson';
-let rightData = 'data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_012024_22Z_V3.geojson';
 // Function to update the labels
 function updateLabels(side) {
     const monthArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -58,245 +35,89 @@ function updateData() {
 function updateHourValue(value) {
     document.getElementById('hour-value').textContent = value;
 }
-mapboxgl.accessToken = 'pk.eyJ1Ijoic3J1bmtlbCIsImEiOiJjbGRrZmdyc3cxbWxmM29udWd6cHZqeXA0In0.KDgLcBpTZkKMYMVcoory4Q';
-const beforemap = new mapboxgl.Map({
-    container: 'before',
-    // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-    style: 'mapbox://styles/mapbox/light-v11', //'mapbox://styles/mapbox/streets-v12',
-    center: [-105, 40],
-    zoom: 8,
-    projection: project
-});
-beforemap.setMaxBounds(bounds);
-    let hoveredStateId = null;
-    beforemap.on('load', () => {
-        const layers = beforemap.getStyle().layers;
+const beforemap = leftMap.getMap();
+let aftermap = rightMap.getMap();
+let censusmap;
+let censusVar = 'PercentPOC';
 
-    // Add a new source from our GeoJSON data and
-    // set the 'cluster' option to true. GL-JS will
-    // add the point_count property to your source data.
-    beforemap.addSource('us-data', {
-        type: 'geojson',
-        tolerance:0.1,
-        // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
-        // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-        data: leftData,
-        //data: 'https://raw.githubusercontent.com/anenbergresearch/AQ-Files/main/tropomi-county-demographics.geojson',
-        generateId:true
-        // Radius of each cluster when clustering points (defaults to 50)
-    });
-    // beforemap.addSource('county-data', {
-    //     type: 'geojson',
-    //     tolerance:0.1,
-    //     // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
-    //     // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-    //     data: 'https://raw.githubusercontent.com/anenbergresearch/AQ-Files/main/tropomi-county-demographics-round.geojson',
-    //     generateId:true
-    //     // Radius of each cluster when clustering points (defaults to 50)
-    // });
-    beforemap.addLayer({
-        'id': 'tract-layer',
-        'type': 'fill',
-        'source': 'us-data',
-        'minzoom':5,
-        'paint': {
-            'fill-color': [
-                'case',
-                ['==', ['get', 'field_avg'], null], // Check if 'field_avg' is null
-                'rgba(0, 0, 0, 0)', // Set to transparent if null
-                ['interpolate', ['linear'], ['get', 'field_avg'], ...STOPS] // Use the stops for other values
-            ],
-        }             
-        //'fill-outline-color': 'rgba(200, 100, 240, 1)'
-        }
-        , firstSymbolId);
-
-        beforemap.addLayer({
-            'id': 'tract-lines',
-            'type': 'line',
-            'source': 'us-data',
-            'minzoom':zoomThresh,
-            //'layout': {},
-            'paint': {
-            'line-color': '#000000',
-            'line-width': [
-                'case',
-                ['boolean', ['feature-state', 'hover'], false],
-                3,
-                0
-                ]
-            }
-            });
-        
-            beforemap.on('mousemove', 'tract-layer', (e) => {
-                beforemap.getCanvas().style.cursor = 'pointer';
-
-                if (e.features.length > 0) {
-                if (hoveredStateId !== null) {
-                beforemap.setFeatureState(
-                    { source: 'us-data', id: hoveredStateId },
-                    { hover: false }
-                    );
-                    }
-
-                    //e.layer.getBounds().getCenter()
-                hoveredStateId = e.features[0].id
-                beforemap.setFeatureState(
-                    { source: 'us-data', id: hoveredStateId },
-                    { hover: true }
-                    );
-                    }
-            });
-
-            beforemap.on('mousemove', 'tract-layer', (e) => {
-                const desc = `<h3>${e.features[0].properties.FIPS_new}</h3><p><strong> NO<sub>2</sub>: </strong> ${e.features[0].properties.field_avg} <span>&times;</span> <em>10<sup>15</sup>  molec/cm<sup>2</sup>  </em></p>`;
-                document.getElementById('poc').innerHTML = desc	
-            });
-            // When the mouse leaves the state-fill layer, update the feature state of the
-            // previously hovered feature.
-            beforemap.on('mouseleave', 'tract-layer', () => {
-                if (hoveredStateId !== null) {
-                beforemap.setFeatureState(
-                    { source: 'us-data', id: hoveredStateId },
-                    { hover: false }
-                    );
-                }
-                beforemap.getCanvas().style.cursor = '';
-                hoveredStateId = null;
-                });
-
-        });
-            // When the mouse leaves the state-fill layer, update the feature state of the
-            // previously hovered feature.
-                //e.layer.getBounds().getCenter()
-                
-
-            // When the mouse leaves the state-fill layer, update the feature state of the
-            // previously hovered feature.
-    const aftermap = new mapboxgl.Map({
-        container: 'after',
-        style: 'mapbox://styles/mapbox/dark-v11',
-        center: [-105, 40],
-        zoom: 8,
-        projection: project
-        });
-    aftermap.setMaxBounds(bounds);
-    aftermap.on('load', () => {
-        const layers = aftermap.getStyle().layers;
-    // Add a new source from our GeoJSON data and
-    // set the 'cluster' option to true. GL-JS will
-    // add the point_count property to your source data.
-    aftermap.addSource('us-data', {
-        type: 'geojson',
-        tolerance:0.1,       // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
-        // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-        data: rightData,//'data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_012024_22Z_V3.geojson',
-        generateId:true
-        // Radius of each cluster when clustering points (defaults to 50)
-    })
-    
-    
-    // aftermap.addSource('county-data', {
-    //     type: 'geojson',
-    //     tolerance:0.1,
-    //     // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
-    //     // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-    //     data: 'https://raw.githubusercontent.com/anenbergresearch/AQ-Files/main/tropomi-county-demographics-round.geojson',
-    //     generateId:true
-    //     // Radius of each cluster when clustering points (defaults to 50)
-    // });
-    aftermap.addLayer({
-        'minzoom':zoomThresh,
-        'id': 'tract-layer',
-        'minzoom':5,
-        'type': 'fill',
-        'source': 'us-data',
-        'paint': {
-            'fill-color': [
-                'case',
-                ['==', ['get', 'field_avg'], null], // Check if 'field_avg' is null
-                'rgba(0, 0, 0, 0)', // Set to transparent if null
-                ['interpolate', ['linear'], ['get', 'field_avg'], ...STOPS] // Use the stops for other values
-            ],
-        } 
-        },firstSymbolId2);
-        aftermap.addLayer({
-            'id': 'tract-lines',
-            'type': 'line',
-            'source': 'us-data',
-            'minzoom':zoomThresh,
-            //'layout': {},
-            'paint': {
-            'line-color': '#000000',
-            'line-width': [
-                'case',
-                ['boolean', ['feature-state', 'hover'], false],
-                3,
-                0
-                ]
-            }
-            });
-        
-        
-        aftermap.on('mousemove', 'tract-layer', (e) => {
-            aftermap.getCanvas().style.cursor = 'pointer';
-            
-            if (e.features.length > 0) {
-            if (hoveredStateId !== null) {
-            aftermap.setFeatureState(
-                { source: 'us-data', id: hoveredStateId },
-                { hover: false }
-                );
-                }
-            
-                //e.layer.getBounds().getCenter()
-                
-            hoveredStateId = e.features[0].id
-            aftermap.setFeatureState(
-                { source: 'us-data', id: hoveredStateId },
-                { hover: true }
-                );
-                }
-            });
-
-            aftermap.on('mousemove', 'tract-layer', (e) => {
-                const desc = `<h3>${e.features[0].properties.FIPS_new}</h3><p><strong> NO<sub>2</sub>: </strong> ${e.features[0].properties.field_avg} <span>&times;</span> <em>10<sup>15</sup>  molec/cm<sup>2</sup>  </em></p>`;
-                document.getElementById('poc').innerHTML = desc	
-            });
-            // When the mouse leaves the state-fill layer, update the feature state of the
-            // previously hovered feature.
-            aftermap.on('mouseleave', 'tract-layer', () => {
-                if (hoveredStateId !== null) {
-                aftermap.setFeatureState(
-                    { source: 'us-data', id: hoveredStateId },
-                    { hover: false }
-                    );
-                }
-                aftermap.getCanvas().style.cursor = '';
-                hoveredStateId = null;
-                });
-            });
-
-    // A selector or reference to HTML element
-    const container = '#comparison-container';
-
-
-    const map = new mapboxgl.Compare(beforemap, aftermap, container, {
+let compareInstance = new mapboxgl.Compare(beforemap, aftermap, map_container, {
     // Set this to enable comparing two maps by mouse movement:
     // mousemove: true
     });
-    document.getElementById('listing-group').addEventListener('change', (e) => {
-        const handler = e.target.id;
-        if (e.target.checked) {
-            const firstSymbolId = 'bridge-rail';//'ferry';
-            const firstSymbolId2 = 'bridge-rail';
-            beforemap.moveLayer('tract-layer', firstSymbolId)
-            aftermap.moveLayer('tract-layer', firstSymbolId2)
-            } else {
-            const firstSymbolId = 'admin-1-boundary-bg';
+function updateCompareInstance(before, after) {
+    if (compareInstance) {
+        compareInstance.remove(); // Remove the existing compare instance
+    }
+    compareInstance = new mapboxgl.Compare(before, after, map_container, {
+        // Set this to enable comparing two maps by mouse movement:
+        // mousemove: true
+    });
+}
 
-            beforemap.moveLayer('tract-layer', firstSymbolId)
-            aftermap.moveLayer('tract-layer', firstSymbolId)
+
+document.getElementById('roadways').addEventListener('change', (e) => {
+    const handler = e.target.id;
+    if (e.target.checked) {
+        const firstSymbolId = 'ferry';
+        const firstSymbolId2 = 'ferry';
+        beforemap.moveLayer('tract-layer', firstSymbolId)
+        aftermap.moveLayer('tract-layer', firstSymbolId2)
+        } else {
+        const firstSymbolId = 'admin-1-boundary-bg';
+
+        beforemap.moveLayer('tract-layer', firstSymbolId)
+        aftermap.moveLayer('tract-layer', firstSymbolId)
+    }
+    
+    });
+
+document.getElementById('census').addEventListener('change', (e) => {
+    const handler = e.target.id;
+    if (e.target.checked) {
+        /// create new aftermap
+        if (aftermap) {
+            aftermap.remove();
         }
         
-        });
+        censusMap.initializeMap();
+        aftermap = censusMap.getMap();
+        updateCompareInstance(beforemap, aftermap);
+        } else {
+        if (aftermap) {
+            aftermap.remove()
+        }
+        rightMap.initializeMap();
+        aftermap = rightMap.getMap();
+        updateCompareInstance(beforemap, aftermap);
+    }
+    
+    });
+
+    // document.getElementById('census').addEventListener('change', (e) => {
+    //     // Remove the existing 'tract-layer' if it exists
+    //     const handler = e.target.id;
+    //     if (e.target.checked) {
+    //     if (aftermap.getLayer('tract-layer')) {
+    //         aftermap.removeLayer('tract-layer');
+    //     }
+    //     aftermap.addLayer({
+    //         id: 'tract-layer',
+    //         type: 'fill', // Adjust the type based on your data, e.g., 'line' or 'symbol'
+    //         source: 'census-data',
+    //     },firstSymbolId)
+    //     // Add the 'tract-layer' with the 'census-data' source
+    //     rightMap.changeVariable('PercentPOC', census_STOPS);
+    //     // Log or alert to confirm update
+    //     console.log('tract-layer updated to use census-data.');}
+    //     else {
+    //         if (aftermap.getLayer('tract-layer')) {
+    //             aftermap.removeLayer('tract-layer');
+    //         }
+    //         rightMap.changeVariable('field_avg', STOPS);
+    //         console.log('tract-layer updated to use NO2 data.');
+    //     }
+    // });
+    document.getElementById('census-variable').addEventListener('change', (e) => {
+        censusVar = e.target.value;
+        censusMap.changeVariable(censusVar, census_STOPS[censusVar]);
+    });
