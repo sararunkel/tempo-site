@@ -119,5 +119,5 @@ document.getElementById('census').addEventListener('change', (e) => {
     // });
     document.getElementById('census-variable').addEventListener('change', (e) => {
         censusVar = e.target.value;
-        censusMap.changeVariable(censusVar, census_STOPS);
+        censusMap.changeVariable(censusVar, census_STOPS[censusVar]);
     });

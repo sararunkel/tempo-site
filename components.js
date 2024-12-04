@@ -1,7 +1,8 @@
 // Initialize Slider component
 
 //dictionary with the slider values
-var SliderValues = {'01': [8, 9, 10, 11, 12, 13, 14, 15],
+var SliderValues = {
+'01': [8, 9, 10, 11, 12, 13, 14, 15],
  '02': [8, 9, 10, 11, 12, 13, 14, 15, 16],
  '03': [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
  '04': [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
