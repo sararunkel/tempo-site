@@ -103,7 +103,7 @@ label {
     width: 100%;
 }
 .e-control-wrapper.e-slider-container .e-scale .e-tick .e-tick-value {
-    font: 8px/10px 'Inter', sans-serif;
+    font: 10px/12px 'Inter', sans-serif;
     font-weight: 400;
     color: black;
 }
@@ -119,16 +119,16 @@ a {
 
 /* Add font for headers */
 h1 {
-    font: 36px/40px 'Gayathri';
-    font-weight: bold;
+    font: 36px/40px 'DM Sans';
+    font-weight: 900;
 }
 h2 {
-    font: 24px/30px 'Gayathri';
-    font-weight: regular;
+    font: 24px/30px 'DM Sans';
+    font-weight: 500;
 }
 h3 {
-    font: 18px/18px 'Gayathri';
-    font-weight: bold;
+    font: 18px/18px 'DM Sans';
+    font-weight: 700;
 }
 p {
     font: 12px/20px 'Inter', sans-serif;
@@ -175,4 +175,9 @@ p {
 .listing-group input[type='checkbox']:checked + label:before {
     content: '✔';
     margin-right: 5px;
+}
+
+.popup-content p {
+    margin: 2px 0; /* Adjust the margin as needed */
+    line-height: 1.2; /* Adjust the line height as needed */
 }

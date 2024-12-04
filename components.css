@@ -17,29 +17,32 @@
     width: 260px;
   }
 
-  .selector-container .button {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #f0f0f0;
-}
+
 
 .selector-container input[type="radio"] {
     display: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
 }
 .slider-container label {
     font-weight: bold;
     padding-top: 10px;
     display: block;
+    width: 90%;
 }
 
 .selector-container input[type="radio"]:checked + .button {
     background-color: #007bff;
     color: white;
     border-color: #007bff;
+}
+
+.e-control-wrapper.e-slider-container.e-horizontal {
+    height: 48px;
+    width: 90%;
+    display: flex;
+    justify-content: center;
 }
 .e-scale .e-tick.e-custom::before {
     content: '\e967';
@@ -57,8 +60,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 .map-label {
     font-weight: bold;
@@ -86,14 +88,17 @@
 .selector-container.hidden {
     display: none;
 }
+.selector-container {
+    margin-top: 20px;
+}
 .console-header {
     cursor: pointer;
 }
 
 .console-content {
-    display: none;
     flex: 1;
     overflow: scroll;
+    height: fit-content;
     transition: height 0.3s ease;
 }
 
@@ -108,5 +113,117 @@
 }
 
 .console-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+#census-colorbar {
+    display: flex;
+    height: 20px;
+    width: 100%;
+}
+.colorbar-segment {
+    flex: 1;
+    height: 100%;
+}
+
+.draggable {
+    width: 300px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ffffff;
+    background-color: #ffffff;
+    position: absolute;
+    top: 70%;
+    left: 10px;
+    cursor: move;
+    z-index: 1000;
+}
+.slider-container {
+    display: block;
+    margin: 10px;
+}
+
+.slider-container.hidden {
+    display: none;
+}
+.draggable h3 {
+    margin: 0;
+    padding: 0;
+    cursor: move;
+}
+#toggle-button {
+    background: none;
+    border: none;
+    font-size: 1em;
     cursor: pointer;
+}
+#console-button {
+    background: none;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+}
+/* For the legend */
+.map-legend {
+    height: 8px;
+    margin: 0 2px;
+    min-width: 240px;
+    position: relative;
+    pointer-events: none;
+    width: 98%;
+}
+.map-legend-bar {
+    position: relative;
+}
+
+.legend-bar {
+    box-shadow: inset 1px 0 0 0 rgba(0, 0, 0, .1), inset 0 1px 0 0 rgba(0, 0, 0, .1), inset 0 -1px 0 0 rgba(0, 0, 0, .1);
+    position: absolute;
+    height: 8px;
+    z-index: 0;
+}
+.map-legend-gradient {
+    box-shadow: inset 1px 0 0 0 rgba(0, 0, 0, .1), inset 0 1px 0 0 rgba(0, 0, 0, .1), inset 0 -1px 0 0 rgba(0, 0, 0, .1);
+    z-index: 0;
+}
+.map-legend-container {
+    margin-top: 0;
+    margin-bottom: 55px;
+    width: 93%;
+}
+
+.tick-text {
+    font-family: "DM Sans";
+    font-size: 12px;
+    color: #6e6e6e;
+    position: absolute;
+    text-align: center;
+    top: 13px;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.tick-text.guideline {
+    color: #121212;
+    font-weight: 700;
+}
+
+.tick-mark {
+    background-color: #dcdcdc;
+    height: 4px;
+    position: absolute;
+    top: 8px;
+    width: 1px;
+}
+
+.tick-mark.guideline {
+    background-color: #333;
+    top: 0;
+    height: 12px;
+}
+.tick-text-two-line {
+    display: block;
+    line-height: 1;
+    position: relative;
 }

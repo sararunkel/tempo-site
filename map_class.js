@@ -110,12 +110,13 @@ class MapInitializer {
             
                 }
                 const fieldAvg = e.features[0].properties.field_avg;
-                const desc = `<h3>${this.TRACT}</h3>
-                    <p><strong> NO<sub>2</sub>: </strong> ${fieldAvg !== undefined ? fieldAvg.toFixed(2) : 'N/A'} <span>&times;</span> <em>10<sup>15</sup>  molec/cm<sup>2</sup>  </em></p>
-                    <p><strong> % POC: </strong> ${this.POC !== undefined ? this.POC.toFixed(2) : 'N/A'}</p>
-                    <p><strong> Median Income: </strong> $${this.income !== undefined ? this.income.toLocaleString() : 'N/A'}</p>
-                    <p><strong> Median Age: </strong> ${this.age !== undefined ? this.age.toFixed(2) : 'N/A'}</p>
-                    <p><strong> % Poverty: </strong> ${this.poverty !== undefined ? this.poverty.toFixed(2) : 'N/A'}</p>`;
+                const desc = `<div class="popup-content">
+                <h3>${this.TRACT}</h3>
+                    <p><strong> NO<sub>2</sub>: </strong> ${fieldAvg !== undefined && fieldAvg !== -666666666 ? fieldAvg.toFixed(2) : 'N/A'} <span>&times;</span> <em>10<sup>15</sup>  molec/cm<sup>2</sup>  </em></p>
+                    <p><strong> % POC: </strong> ${this.POC !== undefined && this.POC !== -666666666 ? this.POC.toFixed(2) : 'N/A'}</p>
+                    <p><strong> Median Income: </strong> $${this.income !== undefined && this.income !== -666666666 ? this.income.toLocaleString() : 'N/A'}</p>
+                    <p><strong> Median Age: </strong> ${this.age !== undefined && this.age !== -666666666 ? this.age.toFixed(2) : 'N/A'}</p>
+                    <p><strong> % Poverty: </strong> ${this.poverty !== undefined && this.poverty !== -666666666 ? this.poverty.toFixed(2) : 'N/A'}</p>`;
 
                 //document.getElementById('poc').innerHTML = desc;
                 this.popup.setLngLat(e.lngLat)

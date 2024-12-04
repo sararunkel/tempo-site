@@ -86,13 +86,13 @@ mapSelector.forEach(function(radio) {
     });
 });
 
-document.querySelector('.console-header').addEventListener('click', function() {
-    const consoleContent = document.querySelector('.console-content');
-    consoleContent.style.display = consoleContent.style.display === 'none' ? 'block' : 'none';
-    const console = document.getElementById('console');
-    console.classList.toggle('console-collapsed');
-    console.classList.toggle('console-expanded');
-});
+// document.querySelector('.console-header').addEventListener('click', function() {
+//     const consoleContent = document.querySelector('.console-content');
+//     consoleContent.style.display = consoleContent.style.display === 'none' ? 'block' : 'none';
+//     const console = document.getElementById('console');
+//     console.classList.toggle('console-collapsed');
+//     console.classList.toggle('console-expanded');
+// });
 
 document.getElementById('census').addEventListener('change', function() {
     const dropdownContainer = document.getElementById('census-dropdown-container');
@@ -106,6 +106,95 @@ document.getElementById('census').addEventListener('change', function() {
         dropdownContainer.style.display = 'none';
         selectorContainer.classList.remove('hidden');
     }
+});
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const draggableDiv = document.getElementById('draggable-div');
+    const toggleButton = document.getElementById('toggle-button');
+    const consoleButton = document.getElementById('console-button');
+    const sliderContainer = draggableDiv.querySelector('.slider-container');
+    const consoleContent = document.querySelector('.console-content');
+    const console = document.getElementById('console');
+    toggleButton.addEventListener('click', () => {
+        if (sliderContainer.classList.contains('hidden')) {
+            sliderContainer.classList.remove('hidden');
+            toggleButton.textContent = '-';
+        } else {
+            sliderContainer.classList.add('hidden');
+            toggleButton.textContent = '+';
+        }
+    });
+    function positionDraggableDiv() {
+        const consoleHeight = console.offsetHeight;
+        draggableDiv.style.top = (consoleHeight + 10) + 'px';
+    }
+    positionDraggableDiv();
+    consoleButton.addEventListener('click', () => {
+        if (console.classList.contains('console-collapsed')) {
+            
+            
+            console.classList.remove('console-collapsed');
+            console.classList.add('console-expanded');
+            consoleButton.textContent = '-';
+        } else {
+            console.classList.remove('console-expanded');
+            console.classList.add('console-collapsed');
+            consoleButton.textContent = '+';
+        }
+        consoleContent.style.display = consoleContent.style.display === 'none' ? 'block' : 'none';
+    });
+
+    draggableDiv.addEventListener('mousedown', (e) => {
+        const rect = draggableDiv.getBoundingClientRect();
+        draggableDiv.style.top = rect.top + 'px';
+        draggableDiv.style.bottom = 'auto';
+
+        let shiftX = e.clientX - rect.left;
+        let shiftY = e.clientY - rect.top;
+
+        function moveAt(pageX, pageY) {
+            draggableDiv.style.left = pageX - shiftX + 'px';
+            draggableDiv.style.top = pageY - shiftY + 'px';
+        }
+
+        function onMouseMove(e) {
+            moveAt(e.pageX, e.pageY);
+        }
+
+        document.addEventListener('mousemove', onMouseMove);
+
+        draggableDiv.addEventListener('mouseup', () => {
+            document.removeEventListener('mousemove', onMouseMove);
+            draggableDiv.onmouseup = null;
+        });
+
+        draggableDiv.ondragstart = () => {
+            return false;
+        };
+    });
+});
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const censusVariableSelect = document.getElementById('census-variable');
+    const colorbar = document.getElementById('census-colorbar');
+
+    function updateColorbar(variable) {
+        const stops = census_STOPS[variable];
+        console.log('Updating color bar for variable:', variable);
+        colorbar.innerHTML = ''; // Clear existing color bar segments
+
+        for (let i = 1; i < stops.length; i += 2) {
+            const colorSegment = document.createElement('div');
+            colorSegment.className = 'colorbar-segment';
+            colorSegment.style.backgroundColor = stops[i];
+            colorbar.appendChild(colorSegment);
+        }
+    }
+
+    // Update color bar when the dropdown value changes
+    censusVariableSelect.addEventListener('change', (e) => {
+        updateColorbar(e.target.value);
+    });
 });
 // // Add event listeners to the sliders
 // document.getElementById('month-slider').ej2_instances[0].change = function(args) {
