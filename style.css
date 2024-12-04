@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    
 }
 
 #map {
@@ -52,23 +53,62 @@ body * {
 }
 
 .colors {
-    background: linear-gradient(to right, #5CB946, #99d15a, #bbdf52, #dbed47, #fbfb39, #f7c004, #df860c, #be4e0f, #97000e);
-    margin-bottom: 5px;
+    background: linear-gradient(to right, #0927a0, #59e1ff, #aeffc8, #fff947, #ff9b29, #f9525d, #850000,#320000);
+    height: 20px;
+    position: relative;
+    /* margin-bottom: 20px; */
+}
+
+.ticks {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: 0; /* Adjust to position tick marks */
+}
+
+.tick {
+    width: 1px;
+    height: 10px;
+    background: black;
+}
+
+.labels {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-top: 5px;
 }
 
 .label {
-    width: 15%;
-    display: inline-block;
-    text-align: center;
+    width: 10%;
+    /* display: inline-block; */
+    text-align: left;
 }
 
 .col {
     height: 12px;
     width: 100%;
 }
-
+label {
+    font: 12px/20px 'Inter', sans-serif;
+    font-weight: 400;
+    color: black;
+}
+.map-label {
+    font: 12px/20px 'Inter', sans-serif;
+    font-weight: 400;
+    color: black;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+}
+.e-control-wrapper.e-slider-container .e-scale .e-tick .e-tick-value {
+    font: 8px/10px 'Inter', sans-serif;
+    font-weight: 400;
+    color: black;
+}
 .demos {
-    background: linear-gradient(to right, #ffffe0, #abdad9, #7daeca, #5681b9, #2b57a7, #00429d);
+    background: linear-gradient(to right, #0052a9, #4bccff, #a9ffd4, #fcfccd, #ffa646, #d05134, #75001d);
     margin-bottom: 5px;
 }
 
@@ -77,20 +117,25 @@ a {
     color: #2dc4b2;
 }
 
-#console {
-    position: absolute;
-    width: 280px;
-    height: 55%;
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: white;
-    overflow-y: auto;
-    border-radius: 5px;
+/* Add font for headers */
+h1 {
+    font: 36px/40px 'Gayathri';
+    font-weight: bold;
 }
-
+h2 {
+    font: 24px/30px 'Gayathri';
+    font-weight: regular;
+}
+h3 {
+    font: 18px/18px 'Gayathri';
+    font-weight: bold;
+}
+p {
+    font: 12px/20px 'Inter', sans-serif;
+}
 .listing-group {
-    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    font-weight: 600;
+    font: 12px/20px 'Inter', sans-serif;
+    font-weight: 400;
     position: absolute;
     top: 10px;
     right: 10px;

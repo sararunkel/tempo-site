@@ -1,0 +1,112 @@
+#loader {
+    color: #008cff;
+    font-family: 'Helvetica Neue','calibiri';
+    font-size: 14px;
+    height: 40px;
+    left: 45%;
+    position: absolute;
+    top: 45%;
+    width: 30%;
+  }
+  
+  .wrap {
+    box-sizing: border-box;
+    height: 260px;
+    margin: 0 auto;
+    /* padding: 30px 10px; */
+    width: 260px;
+  }
+
+  .selector-container .button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+}
+
+.selector-container input[type="radio"] {
+    display: none;
+}
+.slider-container label {
+    font-weight: bold;
+    padding-top: 10px;
+    display: block;
+}
+
+.selector-container input[type="radio"]:checked + .button {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+.e-scale .e-tick.e-custom::before {
+    content: '\e967';
+    position: absolute;
+}
+/* #time-slider .e-handle {
+    height: 25px;
+    width: 2px;
+    top: 3px;
+    border-radius: 15px;
+    background-color: #f9920b;
+  } */
+.DateTime-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+}
+.map-label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 90%
+}
+.mapboxgl-compare .compare-swiper-vertical {
+    background-color: 'black'
+}
+
+#console {
+    position: absolute;
+    box-shadow: inset 0 0 0 2px #fff;
+    display:flex;
+    flex-direction: column;
+    width: 300px;
+    height: fit-content;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: white;
+    overflow-y: auto;
+    border-radius: 5px;
+}
+.selector-container.hidden {
+    display: none;
+}
+.console-header {
+    cursor: pointer;
+}
+
+.console-content {
+    display: none;
+    flex: 1;
+    overflow: scroll;
+    transition: height 0.3s ease;
+}
+
+.console-collapsed .console-content {
+    height: 0;
+    padding: 0;
+}
+
+.console-expanded .console-content {
+    height: fit-content;
+    padding: 10px; /* Adjust padding as needed */
+}
+
+.console-header {
+    cursor: pointer;
+}

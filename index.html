@@ -4,44 +4,114 @@
 <meta charset="utf-8">
 <title>Swipe between maps</title>
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link rel="stylesheet" href="components.css">
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
+<link href="https://cdn.syncfusion.com/ej2/27.2.2/ej2-base/styles/material.css" rel="stylesheet">
+    <link href="https://cdn.syncfusion.com/ej2/27.2.2/ej2-inputs/styles/material.css" rel="stylesheet">
+    <link href="https://cdn.syncfusion.com/ej2/27.2.2/ej2-popups/styles/material.css" rel="stylesheet">
+    <link href="https://cdn.syncfusion.com/ej2/27.2.2/ej2-buttons/styles/material.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.js"></script>
+<script src="https://cdn.syncfusion.com/ej2/27.2.2/dist/ej2.min.js" type="text/javascript"></script>
+<script src="https://cdn.syncfusion.com/ej2/syncfusion-helper.js" type ="text/javascript"></script>
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.css" type="text/css">
 <link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Gayathri:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
 <div id="comparison-container">
-<div id="before" class="map"></div>
-<div id="after" class="map"></div>
+  <div id="before" class="map"></div>
+  <div id="after" class="map"></div>
 </div>
 <nav id="listing-group" class="listing-group">
-<input type="checkbox" id="roadways" checked="checked">
+<input type="checkbox" id="roadways">
 <label for="roadways">include roadways</label>
+<input type="checkbox" id="census">
+<label for="census">include census data</label>
+<div id="census-dropdown-container" style="display: none;">
+  <label for="census-variable">Select Variable:</label>
+  <select id="census-variable">
+      <option value="TotalPop">Total Population</option>
+      <option value="MedianIncome">Median Income</option>
+      <option value="MedianAge">Median Age</option>
+      <option value="PercentPoverty">% Below Poverty</option>
+      <option value="PercentPOC">% People of Color</option>
+  </select>
+</div>
 </nav>
 <div id="console">
-  <h1>NO<sub>2</sub> Morning and Evening</h1>
-	<hr>
-  <div>
-	  <p align="justify" style="padding-left: 4px;color:rgba(71,71,71,1.00)" >   Move the slider to compare NO<sub>2</sub> at 9am (left) and 5pm (right) for Summer 2024.
-		 Zoom in for data on the census tract level. Hover over map for exact values.</p>
+  <div class="console-header">
+      <h1>NO<sub>2</sub> Explorer</h1>
+      <h2>Click to edit the map</h2>
   </div>
-	<hr>
-  <div id="poc"><p> </p></div>
-<div class="session">
-  <h3>NO<sub>2</sub> (<em>10</em><sup>15</sup><em>molec/cm</em><sup>2</sup>)</h3>
-<div class="row colors">
+  <div class="console-content">
+      <hr>
+      <div>
+          <p align="justify" style="padding-left: 4px;color:rgba(71,71,71,1.00)">Use the sliders to select the month and time to compare NO<sub>2</sub> levels. You can choose to change the data on either the left or right map. Hover over the map for exact values.</p>
+      </div>
+      <hr>
+      <div id="poc"><p> </p></div>
+      <div class="session">
+          <h3>NO<sub>2</sub> (<em>10</em><sup>15</sup><em>molec/cm</em><sup>2</sup>)</h3>
+          <div class="row colors"></div>
+          <div class="ticks">
+              <div class="tick"></div>
+              <div class="tick"></div>
+              <div class="tick"></div>
+              <div class="tick"></div>
+              <div class="tick"></div>
+              <div class="tick"></div>
+              <div class="tick"></div>
+              <div class="tick"></div>
+          </div>
+          <div class="row labels">
+              <div class="label">0</div>
+              <div class="label">1</div>
+              <div class="label">2</div>
+              <div class="label">3</div>
+              <div class="label">4</div>
+              <div class="label">5</div>
+              <div class="label">6</div>
+              <div class="label">7+</div>
+          </div>
+      </div>
+      
+<div class="wrap">
+
+
+ <div class="slider-container">
+  <!-- add label for slider -->
+  <label for="month-slider">Month</label>
+  <div id="month-slider"></div>
+  <label for="time-slider">Time (MST)</label>
+  <div id="time-slider"></div>
+  <div class="selector-container">
+
+    
+    <label>Select Map</label>
+    <div>
+        <input type="radio" id="leftMap" name="mapSelector" value="left" checked>
+        <label for="leftMap" class="button">Left Map</label>
+        <input type="radio" id="rightMap" name="mapSelector" value="right">
+        <label for="rightMap" class="button">Right Map</label>
+    </div>
+    <div class="DateTime-container">
+      <div id="before-label" class="map-label">Jan 8 AM</div>
+      <div id="after-label" class="map-label"> Jan 3 PM</div>
+  </div>
 </div>
-  <div class="row labels">
-    <div class="label">0</div>
-    <div class="label">1</div>
-    <div class="label">2</div>
-    <div class="label">3</div>
-	<div class="label">5</div>
-    <div class="label">7+</div>
-  </div> 
- </div>
-  <p class="source"><strong>Source:</strong><em> <a href="https://tempo.si.edu/data_for_public.html">TEMPO</a></em> 0.01&#176; regridded data from 2024</p>
+  
+  <!-- Time slider -->
 </div>
+<p class="source"><strong>Source:</strong><em> <a href="https://tempo.si.edu/data_for_public.html">TEMPO</a></em> 0.01&#176; regridded data from 2024</p>
+</div>
+
+</div>
+</div>
+  <script src="constants.js"></script>
+  <script src="map_class.js"></script>
 	<script src="main.js"></script>
+  <script src="components.js"></script>
 
 </body>
 </html>
