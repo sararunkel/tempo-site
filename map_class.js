@@ -199,6 +199,13 @@ const censusMapConfig = {
     variable: 'PercentPOC'
 };
 
+const displayConfig = {
+    containerId: 'displaymap',
+    data: rightData,
+    stops: STOPS,
+    variable: 'field_avg'
+};
+
 
 
 const leftMap = new MapInitializer(
@@ -214,6 +221,8 @@ const rightMap = new MapInitializer(
     afterMapConfig.stops,
     afterMapConfig.variable
 );
+
+
 const censusMap = new MapInitializer(
     censusMapConfig.containerId,
     censusMapConfig.data,
@@ -224,6 +233,16 @@ leftMap.initializeMap();
 
 
 rightMap.initializeMap();
+document.addEventListener('DOMContentLoaded', function() {
+    // Your map initialization code here
+    const displayMap = new MapInitializer(
+        displayConfig.containerId,
+        displayConfig.data,
+        displayConfig.stops,
+        displayConfig.variable
+    );
+    displayMap.initializeMap();
+});
 
 
 

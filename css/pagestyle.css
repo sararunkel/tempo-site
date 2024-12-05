@@ -1,7 +1,22 @@
-body {
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+html {
+    scroll-snap-type: y mandatory;
 }
 
+h1 {
+    font: 36px/40px 'DM Sans';
+    font-weight: 900;
+}
+h2 {
+    font: 24px/30px 'DM Sans';
+    font-weight: 500;
+}
+h3 {
+    font: 18px/18px 'DM Sans';
+    font-weight: 700;
+}
+p {
+    font: 12px/20px 'Inter', sans-serif;
+}
 nav ul {
     list-style-type: none;
     padding: 0;
@@ -32,8 +47,12 @@ nav li a:hover {
 
 /* General section styling */
 section {
-    padding: 2rem;
-    margin: 2rem 0;
+    /* padding: 2rem;
+    margin: 2rem 0; */
+    height: 80vh;
+    width: 100vw;
+    scroll-snap-align: center;
+    scroll-padding: 50%;
 }
 
 h2 {
@@ -73,23 +92,18 @@ h2 {
     border: 2px solid #ddd;
     border-radius: 8px;
     padding: 1rem;
-    min-height: 300px;
+    max-width: 50%;
+    max-height:300px;
 }
 
 /* Make sliders box take up 1 part */
 .builder-component:nth-child(1) {
-    flex: 1;
+    flex: 2;
 }
 
-/* Make location box square */
-.builder-component:nth-child(2) {
-    flex: 1;
-    aspect-ratio: 1;
-    min-height: unset;
-}
 
 /* Make knit pattern box take up 2 parts */
-.builder-component:nth-child(3) {
+.builder-component:nth-child(2) {
     flex: 2;
 }
 
@@ -137,7 +151,7 @@ h2 {
     justify-content: space-around;
     gap: 1rem;
     padding: 0.5rem;
-    height: 250px;
+    height: 100%;
 }
 
 .slider-group {

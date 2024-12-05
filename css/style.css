@@ -16,6 +16,7 @@ body {
     color: gray;
 }
 
+
 #no2 {
     align-content: flex-start;
     padding: 4px;
@@ -28,6 +29,7 @@ body * {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    
 }
 
 .border {
@@ -167,6 +169,7 @@ p {
     text-transform: capitalize;
 }
 
+
 .listing-group input[type='checkbox'] + label:hover,
 .listing-group input[type='checkbox']:checked + label {
     background-color: whitesmoke;
@@ -180,4 +183,5 @@ p {
 .popup-content p {
     margin: 2px 0; /* Adjust the margin as needed */
     line-height: 1.2; /* Adjust the line height as needed */
+    z-index: 1000;
 }

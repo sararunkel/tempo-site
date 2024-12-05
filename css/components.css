@@ -190,8 +190,14 @@
 }
 .map-legend-container {
     margin-top: 0;
+    margin-left:10px;
     margin-bottom: 55px;
-    width: 93%;
+    width: 84%;
+}
+.census-legend-container {
+    margin-top: 50px;
+    margin-bottom: 55px;
+    width: 100%;
 }
 
 .tick-text {
