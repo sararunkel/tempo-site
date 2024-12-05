@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Swipe between maps</title> 
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
+<link href="https://cdn.syncfusion.com/ej2/27.2.2/ej2-base/styles/material.css" rel="stylesheet">
+    <link href="https://cdn.syncfusion.com/ej2/27.2.2/ej2-inputs/styles/material.css" rel="stylesheet">
+    <link href="https://cdn.syncfusion.com/ej2/27.2.2/ej2-popups/styles/material.css" rel="stylesheet">
+    <link href="https://cdn.syncfusion.com/ej2/27.2.2/ej2-buttons/styles/material.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.js"></script>
+<script src="https://cdn.syncfusion.com/ej2/27.2.2/dist/ej2.min.js" type="text/javascript"></script>
+<script src="https://cdn.syncfusion.com/ej2/syncfusion-helper.js" type ="text/javascript"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.css" type="text/css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/button.css">
+<link rel="stylesheet" href="css/components.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="comparison-container">
+  <div id="before" class="map"></div>
+  <div id="after" class="map"></div>
+</div>
+<nav id="listing-group" class="listing-group">
+<input type="checkbox" id="roadways">
+<label for="roadways">include roadways</label>
+<input type="checkbox" id="census">
+<label for="census">include census data</label>
+<div id="census-dropdown-container" style="display: none;">
+  <label for="census-variable">Select Variable:</label>
+  <select id="census-variable">
+      <option value="TotalPop">Total Population</option>
+      <option value="MedianIncome">Median Income</option>
+      <option value="MedianAge">Median Age</option>
+      <option value="PercentPoverty">% Below Poverty</option>
+      <option value="PercentPOC">% People of Color</option>
+  </select>
+</div>
+</nav>
+<div id="draggable-div" class="draggable">
+  <h3>Adjust Settings <button id="toggle-button">-</button></h3>
+<div class="slider-container">
+  <!-- add label for slider -->
+  <label for="month-slider">Month</label>
+  <div id="month-slider"></div>
+  <label for="time-slider">Time (MST)</label>
+  <div id="time-slider"></div>
+
+<div class="selector-container">
+<h3 class ='select-map-heading'>Select Map</h3>
+<div class="toggle">
+    <input type="radio" id="leftMap" name="mapSelector" value="left" checked>
+    <label for="leftMap" class="button">Left Map</label>
+    <input type="radio" id="rightMap" name="mapSelector" value="right">
+    <label for="rightMap" class="button">Right Map</label>
+</div>
+
+<div class="DateTime-container">
+  <div id="before-label" class="map-label">Jan 8 AM</div>
+  <div id="after-label" class="map-label"> Jan 3 PM</div>
+</div>
+</div>
+</div>
+</div>
+<div id="console">
+  <div class="console-header">
+      <h1>NO<sub>2</sub> Explorer <button id="console-button">-</button></h1>
+  </div>
+  <div class="console-content">
+      <hr>
+      <div>
+          <p align="justify" style="padding-left: 4px;color:rgba(71,71,71,1.00)">Use the sliders to select the month and time to compare NO<sub>2</sub> levels. You can choose to change the data on either the left or right map. Hover over the map for exact values.</p>
+      </div>
+      <hr>
+      <div id="poc"><p> </p></div>
+      <div class="session">
+          <div class="map-legend-container">
+            <p class="legend-label">NO<sub>2</sub> (<em>10</em><sup>15</sup><em>molec/cm</em><sup>2</sup>)</p>
+            <div class="map-legend">
+              <div class="map-legend-bar">
+                <div class="map-legend-gradient" style="background: linear-gradient(to right, #0052a9 0%, #4bccff 14.29%, #a9ffd4 28.58%, #fcfccd 42.87%, #ffa646 57.16%, #d05134 71.45%, #75001d 85.74%); height: 8px;"></div>
+              </div>
+              <!-- <div class="map-legend-gradient" style="background: linear-gradient(to right, #0052a9 0%, #4bccff 31.25%, #a9ffd4 40.625%, #fcfccd 50%, #ffa646 56.25%, #d05134 62.5%, #75001d 68.75%); height: 20px;"></div></div> -->
+            <div class="tick-text" style="left: 0%;">0</div>
+            <div class="tick-text" style="left: 14.29%;">1</div>
+            <div class="tick-text" style="left: 28.58%;">2</div>
+            <div class="tick-text guideline" style="left: 42.87%;"><span class="tick-text-two-line">3</span><span class="tick-text-two-line">WHO annual</span><span class="tick-text-two-line">max</span></div>
+            <div class="tick-text" style="left: 57.26%;">4</div>
+            <div class="tick-text" style="left: 71.45%;">5</div>
+            <div class="tick-text" style="left: 85.74%;">6</div>
+            <div class="tick-text guideline" style="left: 100%;"><span class="tick-text-two-line">7+</span><span class="tick-text-two-line">WHO daily</span><span class="tick-text-two-line">max</span></div>
+            <div class="tick-mark" style="left: 0%;"></div>
+            <div class="tick-mark" style="left: 14.29%;"></div>
+            <div class="tick-mark" style="left: 28.58%;"></div>
+            <div class="tick-mark guideline" style="left: 42.87%;"></div>
+            <div class="tick-mark" style="left: 57.16%;"></div>
+            <div class="tick-mark" style="left: 71.45%;"></div>
+            <div class="tick-mark" style="left: 85.74%;"></div>
+            <div class="tick-mark guideline" style="left: 100%;"></div>
+          </div>
+          <div class="census-legend-container">
+            <p class="legend-label">Percent People of Color</p>
+            <div class="map-legend">
+              <div class="map-legend-bar">
+                <div class="census-legend-gradient" style="background: linear-gradient(to right, #F2EBF7 0%, #E3D8EB 14.29%, #D4C7DF 28.58%, #B4A0CA 42.87%, #9B7CB5 57.16%, #6f518a 71.45%, #523d6f 85.74%); height: 8px;"></div>
+              </div>
+              <!-- <div class="map-legend-gradient" style="background: linear-gradient(to right, #0052a9 0%, #4bccff 31.25%, #a9ffd4 40.625%, #fcfccd 50%, #ffa646 56.25%, #d05134 62.5%, #75001d 68.75%); height: 20px;"></div></div> -->
+            <div class="tick-text" style="left: 0%;">0</div>
+            <div class="tick-text" style="left: 14.29%;">10</div>
+            <div class="tick-text" style="left: 28.58%;">20</div>
+            <div class="tick-text" style="left: 42.87%;">30</div>
+            <div class="tick-text" style="left: 57.26%;">40</div>
+            <div class="tick-text" style="left: 71.45%;">50</div>
+            <div class="tick-text" style="left: 85.74%;">60</div>
+            <div class="tick-text" style="left: 100%;">70+</div>
+            <div class="tick-mark" style="left: 0%;"></div>
+            <div class="tick-mark" style="left: 14.29%;"></div>
+            <div class="tick-mark" style="left: 28.58%;"></div>
+            <div class="tick-mark" style="left: 42.87%;"></div>
+            <div class="tick-mark" style="left: 57.16%;"></div>
+            <div class="tick-mark" style="left: 71.45%;"></div>
+            <div class="tick-mark" style="left: 85.74%;"></div>
+            <div class="tick-mark" style="left: 100%;"></div>
+          </div>
+
+
+
+          </div>
+      </div>
+      
+    
+  
+
+    
+
+
+  
+  <!-- Time slider -->
+
+<p class="source"><strong>Source:</strong><em> <a href="https://tempo.si.edu/data_for_public.html">TEMPO</a></em> 0.01&#176; regridded data from 2024</p>
+
+</div>
+
+</div>
+  <script src="constants.js"></script>
+  <script src="map_class.js"></script>
+	<script src="main.js"></script>
+  <script src="components.js"></script>
+
+</body>
+</html>
