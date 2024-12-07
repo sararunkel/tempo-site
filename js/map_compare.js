@@ -53,7 +53,7 @@ function updateData() {
         console.log(leftData)
         beforemap.getSource('us-data').setData(leftData);
     } else {
-        rightData = `data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_${month}${year}_${hour}Z_V3.geojson`;
+        rightData = `../data/monthly/HAQ_TEMPO_NO2_CONUS_QA75_L3_Monthly_${month}${year}_${hour}Z_V3.geojson`;
         aftermap.getSource('us-data').setData(rightData);
     }
     updateLabels(selectedMap);

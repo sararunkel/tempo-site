@@ -1,5 +1,5 @@
 html, body {
-    width: 100%;
+    width: 100vw;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -14,7 +14,7 @@ html, body {
 
   }
   iframe, img {
-    max-width: 100%; /* Ensure images and iframes do not exceed container width */
+    max-width: 100vw; /* Ensure images and iframes do not exceed container width */
     height: auto; /* Maintain aspect ratio */
 }
 @media (max-width: 768px) {
@@ -22,13 +22,15 @@ html, body {
         padding: 0; /* Avoid adding padding that causes overflow */
     }
     .page iframe {
-        width: calc(100vw - 50px);
         overflow-x: hidden;
       }
 }
 
+
+
   /* Ensure the scroll container is flexible */
 .scroll-container {
+    position:relative;
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
@@ -40,7 +42,7 @@ html, body {
 }
 
   .ct {
-    max-width: 100%;
+    max-width: 100vw;
     height: 100vh; /* Full viewport height */
     scroll-snap-align: start;
     margin: 0;
@@ -57,7 +59,7 @@ html, body {
   
   .page {
 
-    max-width: 100%;
+    max-width: calc(100vw-50px);
     position: absolute;
     scroll-snap-align: start;
   }
@@ -68,6 +70,8 @@ html, body {
   
   #p2, #p3, #p4, #p5 {
     left: 200%;
+    visibility: hidden;
+    transition: transform 1.5s ease, opacity 1s ease;
   }
   
   #p1 { background: darkslateblue; }
@@ -76,16 +80,27 @@ html, body {
   #p4 { background: deeppink; }
   #p5 { background: rebeccapurple; }
   
-  #t2:target #p2,
-  #t3:target #p3,
-  #t4:target #p4,
-  #t5:target #p5 {
-    transform: translateX(calc(-200% + 60px));
-    -webkit-transform: translateX(calc(-200% + 60px));;
-    -moz-transform: translateX(calc(-200% + 60px));;
-    -o-transform: translateX(calc(-200% + 60px));;
-    transition-delay: .4s !important;
-  }
+#t2:not(:target) #p2,
+#t3:not(:target) #p3,
+#t4:not(:target) #p4,
+#t5:not(:target) #p5 {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(200%);
+    transition: opacity 1s ease, visibility 0s 2s, transform 1.5s ease;
+}
+
+/* Active page styling */
+#t2:target #p2,
+#t3:target #p3,
+#t4:target #p4,
+#t5:target #p5 {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto; /* Enable interaction */
+  transform: translateX(calc(-200% + 60px)); /* Move into view */
+  transition: transform 1.5s ease, opacity 1.5s ease;
+}
   
   #t2:target #p1, 
   #t3:target #p1,
@@ -218,6 +233,18 @@ html, body {
   .line-trough {
     text-decoration: line-through;
   }
+  .page {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    transition: all .8s cubic-bezier(0.54, 0.35, 0.29, 0.99);
+    -webkit-transition: all .8s cubic-bezier(0.54, 0.35, 0.29, 0.99);
+    -moz-transition: all .8s cubic-bezier(0.54, 0.35, 0.29, 0.99);
+    -o-transition: all .8s cubic-bezier(0.54, 0.35, 0.29, 0.99);  
+    color: #fff;
+    overflow: hidden; 
+    height: 100vh; /* Full viewport height */
+}
   
   .page .icon {
     position: absolute;
@@ -260,18 +287,7 @@ html, body {
     transition-delay: 1s;
   }
 
-  .page {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    transition: all .8s cubic-bezier(0.54, 0.35, 0.29, 0.99);
-    -webkit-transition: all .8s cubic-bezier(0.54, 0.35, 0.29, 0.99);
-    -moz-transition: all .8s cubic-bezier(0.54, 0.35, 0.29, 0.99);
-    -o-transition: all .8s cubic-bezier(0.54, 0.35, 0.29, 0.99);  
-    color: #fff;
-    overflow: hidden; 
-    height: 100vh; /* Full viewport height */
-}
+
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 #icon-section::-webkit-scrollbar {

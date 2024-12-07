@@ -149,7 +149,6 @@ h2 {
         margin-bottom: 1rem;
     }
     .page iframe {
-        width: calc(100vw - 50px);
         overflow-x: hidden;
       }
 }
