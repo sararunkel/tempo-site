@@ -8,17 +8,41 @@ html, body {
     -moz-transition: all .8s cubic-bezier(0.54, 0.35, 0.29, 0.99);
     -o-transition: all .8s cubic-bezier(0.54, 0.35, 0.29, 0.99);  
     color: #fff;
-    overflow: hidden; 
+    overflow-x: hidden; 
     scroll-snap-type: y mandatory;
+    box-sizing: border-box;
 
   }
-  html{
+  iframe, img {
+    max-width: 100%; /* Ensure images and iframes do not exceed container width */
+    height: auto; /* Maintain aspect ratio */
+}
+@media (max-width: 768px) {
+    .ct, .page {
+        padding: 0; /* Avoid adding padding that causes overflow */
+    }
+    .page iframe {
+        width: calc(100vw - 50px);
+        overflow-x: hidden;
+      }
+}
+
+  /* Ensure the scroll container is flexible */
+.scroll-container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
     scroll-snap-type: y mandatory;
-  }
+    height: 100vh;
+    max-width:100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
 
   .ct {
-    width: 100%;
+    max-width: 100%;
     height: 100vh; /* Full viewport height */
+    scroll-snap-align: start;
     margin: 0;
     padding: 0;
     transition: all .8s cubic-bezier(0.54, 0.35, 0.29, 0.99);
@@ -32,6 +56,8 @@ html, body {
   }
   
   .page {
+
+    max-width: 100%;
     position: absolute;
     scroll-snap-align: start;
   }
@@ -107,7 +133,7 @@ html, body {
   .page .icon .title {
     line-height: 2;
   }
-  
+
   #t2:target ul .icon,
   #t3:target ul .icon,
   #t4:target ul .icon,
@@ -128,6 +154,13 @@ html, body {
     -moz-transform: scale(1.2) !important;
     -o-transform: scale(1.2) !important;
   }
+  img#uno {
+    width:60px
+  }
+  li#oneicon.icon{
+    margin:38px 0px;
+
+  }
   
   ul {
     position: fixed;
@@ -135,13 +168,12 @@ html, body {
     top: 0;
     bottom: 0;
     left: 0;
-    height: 280px;
-    width: 10px;
+    height: 100vh;
     padding: 0;
     text-align: center;
    }
   #menu {
-    width:40px;
+    width:60px;
   }
   #menu .icon {
     margin: 40px 10px;

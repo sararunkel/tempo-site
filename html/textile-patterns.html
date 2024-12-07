@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ClimateThreads - Home</title>
+    <link rel="stylesheet" href="../css/pagestyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body id="textile-body">
+
+    <!-- Section 1: Interactive Map -->
+    <section id="air-quality-map">
+        <h2>Interactive Air Quality Map</h2>
+        <div class="map-container">
+            <!-- Placeholder for the map -->
+            <div class="scroll-arrows">
+                <button class="scroll-up" onclick="scrollToSection('up')">&#9650;</button>
+                <button class="scroll-down" onclick="scrollToSection('down')">&#9660;</button>
+            </div>
+            <iframe src="displaymap.html" style="width:100%;height:100%; border: none;"></iframe>
+        </div>
+    </section>
+
+    <!-- Section 2: Pattern Builder -->
+    <section id="pattern-builder">
+        <h2>Textile Air Quality Calendar</h2>
+        <div class="builder-container">
+            <!-- Three horizontal containers -->
+            <div class="builder-component">
+                <h3>Data Sliders</h3>
+                <div class="slider-container">
+                    <!-- Time slider -->
+                    <div class="slider-group">
+                        <label for="timeSlider">Time of Day</label>
+                        <div class="slider-with-ticks">
+                            <input type="range" 
+                                   id="timeSlider" 
+                                   min="8" 
+                                   max="17" 
+                                   step="1" 
+                                   value="8">
+                            <div class="ticks">
+                                <span>8am</span>
+                                <span>9am</span>
+                                <span>10am</span>
+                                <span>11am</span>
+                                <span>12pm</span>
+                                <span>1pm</span>
+                                <span>2pm</span>
+                                <span>3pm</span>
+                                <span>4pm</span>
+                                <span>5pm</span>
+                            </div>
+                        </div>
+                        <div id="timeValue" class="slider-value"></div>
+                    </div>
+
+                    <!-- Month slider -->
+                    <div class="slider-group">
+                        <label for="monthSlider">Month</label>
+                        <div class="slider-with-ticks">
+                            <input type="range" 
+                                   id="monthSlider" 
+                                   min="0" 
+                                   max="11" 
+                                   step="1" 
+                                   value="0">
+                            <div class="ticks">
+                                <span>Jan</span>
+                                <span>Feb</span>
+                                <span>Mar</span>
+                                <span>Apr</span>
+                                <span>May</span>
+                                <span>Jun</span>
+                                <span>Jul</span>
+                                <span>Aug</span>
+                                <span>Sep</span>
+                                <span>Oct</span>
+                                <span>Nov</span>
+                                <span>Dec</span>
+                            </div>
+                        </div>
+                        <div id="monthValue" class="slider-value"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="builder-component">
+                <h3>Knit Pattern</h3>
+                <div id="knit-pattern-container" style="width: 100%; height: 400px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Showcase -->
+    <section id="fabric-showcase">
+        <h2>Fabric Showcase</h2>
+        <div class="showcase-grid">
+            <!-- Placeholder for project cards -->
+            <div class="project-card">Project 1</div>
+            <div class="project-card">Project 2</div>
+            <div class="project-card">Project 3</div>
+            <div class="project-card">Project 4</div>
+        </div>
+    </section>
+
+    <!-- Add p5.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <!-- Add your pattern script -->
+    <script src="../js/pattern.js"></script>
+</body>
+</html>

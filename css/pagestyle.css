@@ -1,6 +1,10 @@
 html {
     scroll-snap-type: y mandatory;
+    overflow-x:hidden;
 }
+body {
+    margin: 0;
+    padding: 0;}
 
 h1 {
     font: 36px/40px 'DM Sans';
@@ -45,25 +49,42 @@ nav li a:hover {
     background-color: #4CAF50;
 }
 
+.woven-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.woven-row {
+    width: 100%;
+    height: 50px; /* Adjust height as needed */
+}
+
 /* General section styling */
 section {
     /* padding: 2rem;
     margin: 2rem 0; */
-    height: 80vh;
-    width: 100vw;
-    scroll-snap-align: center;
-    scroll-padding: 50%;
+    box-sizing: border-box;
+    scroll-snap-align: top;
 }
 
 h2 {
     color: #333;
     margin-bottom: 1.5rem;
 }
+#air-quality-map, #pattern-builder, #fabric-showcase {
+    width: 100%;
+    margin: 0 auto;
+    scroll-snap-align: start;
+}
+.map-container iframe, .builder-container iframe {
+    width: 100%;
+    height: 100%;
+}
 
 /* Map Section */
 .map-container {
     width: 100%;
-    height: 400px;
+    height: 100vh;
     background-color: #f0f0f0;
     border: 2px solid #ddd;
     border-radius: 8px;
@@ -82,35 +103,21 @@ h2 {
 /* Pattern Builder Section */
 .builder-container {
     display: flex;
+    flex-direction: column;
     gap: 20px;
     justify-content: space-between;
     margin-top: 1rem;
 }
 
 .builder-component {
-    background-color: #f5f5f5;
-    border: 2px solid #ddd;
+    background-color: #ffffff;
     border-radius: 8px;
     padding: 1rem;
     max-width: 50%;
-    max-height:300px;
-}
-
-/* Make sliders box take up 1 part */
-.builder-component:nth-child(1) {
-    flex: 2;
+    margin-bottom: 20px;
 }
 
 
-/* Make knit pattern box take up 2 parts */
-.builder-component:nth-child(2) {
-    flex: 2;
-}
-
-.builder-component h3 {
-    text-align: center;
-    color: #444;
-}
 
 /* Showcase Section */
 .showcase-grid {
@@ -122,7 +129,6 @@ h2 {
 
 .project-card {
     background-color: #fff;
-    border: 1px solid #ddd;
     border-radius: 8px;
     padding: 1rem;
     text-align: center;
@@ -142,16 +148,14 @@ h2 {
     .builder-component {
         margin-bottom: 1rem;
     }
+    .page iframe {
+        width: calc(100vw - 50px);
+        overflow-x: hidden;
+      }
 }
+.knit-sliders{
+    width:100%
 
-/* Slider styles */
-.slider-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    gap: 1rem;
-    padding: 0.5rem;
-    height: 100%;
 }
 
 .slider-group {
@@ -175,22 +179,6 @@ h2 {
     padding: 0 0.5rem;
 }
 
-/* Vertical slider styling */
-input[type="range"] {
-    appearance: slider-vertical;
-    height: 100%;
-    width: 20px;
-}
-
-/* For browsers that don't support appearance: slider-vertical */
-@supports not (appearance: slider-vertical) {
-    input[type="range"] {
-        transform: rotate(270deg) translateX(-100%);
-        transform-origin: left top;
-        width: 150px;
-        margin-left: 50px;
-    }
-}
 
 .ticks {
     display: flex;
@@ -239,12 +227,13 @@ input[type="range"] {
 
 /* About Page Styles */
 section {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 2rem auto;
     padding: 2rem;
     background-color: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction:row;
 }
 
 section h2 {
