@@ -19,4 +19,4 @@ See [LICENSE](LICENSE).
 - [Sara Runkel](https://github.com/sararunkel)
 - [Robyn Marowitz](https://github.com/rmarow)
 - [Kate Rooney](https://github.com/krooney144)
-- Caitlin Littlejohn
+- [Caitlin Littlejohn](https://github.com/Clittlejohn-24)
