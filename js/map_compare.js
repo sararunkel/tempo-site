@@ -116,6 +116,8 @@ document.getElementById('census').addEventListener('change', (e) => {
         /// update rightMap
         rightMap.changeVariable(censusVar, census_STOPS[censusVar]);
     }
+    else {
+        rightMap.changeVariable('field_avg', STOPS);}
     });
 
     document.getElementById('census-variable').addEventListener('change', (e) => {
@@ -223,3 +225,4 @@ document.getElementById('census').addEventListener('change', (e) => {
             updateColorbar(e.target.value);
         });
     });
+    

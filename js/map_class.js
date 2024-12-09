@@ -88,7 +88,8 @@ class MapInitializer {
         // Add search control
         const geocoder = new MapboxGeocoder({
             accessToken: mapboxgl.accessToken,
-            mapboxgl: mapboxgl
+            mapboxgl: mapboxgl,
+            placeholder: 'Enter your address'
         });
         this.map.addControl(new mapboxgl.NavigationControl());
         this.map.addControl(geocoder);
@@ -98,6 +99,10 @@ class MapInitializer {
             searchIcon.className = 'search-icon';
             searchIcon.innerHTML = '<i class="fas fa-search"></i>';
             document.body.appendChild(searchIcon);
+            searchIcon.style.position = 'fixed';
+            searchIcon.style.right = '10vw';
+            searchIcon.style.top = '2vw';
+            searchIcon.style.zIndex = '1';
     
             // Toggle search bar visibility on icon click
             searchIcon.addEventListener('click', () => {

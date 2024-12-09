@@ -157,13 +157,12 @@ p {
     border: none;
 }
 
-.listing-group input[type='checkbox'] {
+/* .listing-group input[type='checkbox'] {
     display: none;
-}
+} */
 .checkbox-container {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Add this line to space between checkbox and label */
     margin-bottom: 10px; /* Adjust spacing between checkboxes */
 }
 
@@ -175,19 +174,20 @@ p {
     text-transform: capitalize;
 }
 /* Optional: Style for the checkboxes and labels */
-.checkbox-container input[type="checkbox"] {
-    margin-left: 10px; /* Adjust spacing between checkbox and label */
+.checkbox-container input[type="checkbox"]:checked {
+    background-color: #4bccff; /* Change this to your desired color */
+    border-color: #ff4bb7; /* Change this to match the background color */
 }
+
 
 .listing-group input[type='checkbox'] + label:hover,
 .listing-group input[type='checkbox']:checked + label {
     background-color: whitesmoke;
 }
 
-.listing-group input[type='checkbox']:checked + label:before {
+/* .listing-group input[type='checkbox']:checked + label:before {
     content: '✔';
-    margin-right: 5px;
-}
+} */
 
 .popup-content p {
     margin: 2px 0; /* Adjust the margin as needed */
