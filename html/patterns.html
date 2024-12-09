@@ -18,7 +18,11 @@
             padding: 0;
             height: 100%;
             overflow: hidden;
+            color: #1C5796;
             font-family: 'Inter', sans-serif;
+        }
+        html{
+            background-color: rgba(255,255,255,0.95);
         }
         .container {
             height: 100vh;
@@ -43,17 +47,23 @@
             width: 100%;
             box-sizing: border-box;
             text-align: center;
-            margin:20px;
-            border-radius: 10px;
+            margin:2vh 0;
+
+        }
+        .section.welcome {
+            flex-direction:column;
+            text-align:left;
+            padding: 20px;
         }
         .section:nth-child(odd) {
-            background-color: #f9f9f9;
+            background-color: transparent;
         }
         .section:nth-child(even) {
             background-color: #ffffff;
         }
 
         .iframe-container {
+            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -87,7 +97,7 @@
     display: block;
 }
 
-#badair, #sub-badair {
+#badair, #sub-badair,#map1,#map2 {
     position: absolute;
     color: white;
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
@@ -107,19 +117,48 @@
     font-size: 2.5vw; /* Responsive font size */
     font-weight: 400;
 }
+
+#map1 {
+    top: 0; /* Adjust position */
+    font-size: 3vw; /* Responsive font size */
+    font-weight: 700;
+    text-align:left;
+    width:fit-content;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#map2 {
+    top: 0; /* Adjust position */
+    font-size: 2vw; /* Responsive font size */
+    font-weight: 400;
+    width: 80%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
 /* Add styling for the pattern container */
 #knit-pattern-container {
     width: 100%;
     height: 100%;
     display: flex;
+    background: none;
     border-radius: 1px;
+}
+
+canvas{
+    background:none;
 }
 
 .mobile-logo{
 
     display:none;
 }
-
+/* New styles to hide scrollbar */
+.container::-webkit-scrollbar {
+    display: none;
+}
+.container {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
 @media (max-width: 768px) {
     .team-members {
         grid-template-columns: 1fr;
@@ -153,10 +192,17 @@
                 <h2 id="sub-badair">Patterns in air. Stories in data.</h2>
             </div>
         </div>
+        <div class="section welcome">
+            <h2>Welcome to Climate Threads</h2>
+            <p>Climate Threads is a project that aims to raise awareness about air quality and its impact on public health. Through data visualization and textile design, we seek to make invisible disparities in air quality visible and tangible.
+                Explore our website to learn more about air quality in your area and discover how you can take action to improve environmental health.</p>
+        </div>
 
         <!-- Section 3: Map -->
         <div class="section iframe-container">
             <iframe src="displaymap.html" title="Climate Map"></iframe>
+            <!-- <h2 id="map1">Knit your data</h2> -->
+            <h3 id="map2">Click on a census tract or enter your address to generate a knitting pattern of your air quality throughout the year</h3>
         </div>
 
         <!-- Section 4: Knit Pattern -->

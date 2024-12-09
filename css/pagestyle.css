@@ -221,9 +221,9 @@ h2 {
 /* About Page Styles */
 .section {
     max-width: 100%;
-    margin: 10px;
-    padding: 1rem;
-    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 8px;
     display: flex;
     flex-direction:row;
@@ -250,7 +250,6 @@ section h2 {
     position: relative;
 }
 .project-background{
-    background-color: white;
     border-radius:5px;
 }
 

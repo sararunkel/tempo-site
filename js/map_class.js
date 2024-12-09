@@ -35,6 +35,7 @@ class MapInitializer {
         this.map.on('load', () => {
             this.addSource();
             this.addLayers();
+            this.addMapControls();
             this.addEventListeners();
         });
     }
@@ -81,6 +82,28 @@ class MapInitializer {
             });
 
         // Add other layers as needed
+    }
+    addMapControls() {
+        // Add zoom controls
+        // Add search control
+        const geocoder = new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            mapboxgl: mapboxgl
+        });
+        this.map.addControl(new mapboxgl.NavigationControl());
+        this.map.addControl(geocoder);
+
+            // Add search icon for mobile devices
+            const searchIcon = document.createElement('div');
+            searchIcon.className = 'search-icon';
+            searchIcon.innerHTML = '<i class="fas fa-search"></i>';
+            document.body.appendChild(searchIcon);
+    
+            // Toggle search bar visibility on icon click
+            searchIcon.addEventListener('click', () => {
+                document.body.classList.toggle('show-search');
+            });
+
     }
 
     addEventListeners() {

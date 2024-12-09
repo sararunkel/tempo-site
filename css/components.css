@@ -33,11 +33,18 @@
 }
 
 .selector-container input[type="radio"]:checked + .button {
-    background-color: #007bff;
+    background-color: #6f518a;
+    box-shadow: #3f324a;
     color: white;
-    border-color: #007bff;
+    border-color: #6f518a;;
 }
-
+.e-control-wrapper.e-slider-container .e-slider .e-handle {
+    background-color:#6f518a;
+    border-color: #6f518a;
+}
+.e-slider-tooltip.e-tooltip-wrap.e-popup.e-tooltip-wrap.e-popup.e-material-default {
+    background-color: #6f518a;
+}
 .e-control-wrapper.e-slider-container.e-horizontal {
     height: 48px;
     width: 90%;
@@ -69,7 +76,7 @@
     width: 90%
 }
 .mapboxgl-compare .compare-swiper-vertical {
-    background-color: 'black'
+    background-color:#6f518a;
 }
 
 #console {
@@ -95,9 +102,10 @@
 
 .console-content {
     flex: 1;
-    overflow: scroll;
+    overflow: hidden;
     height: fit-content;
     transition: height 0.3s ease;
+    border:none;
 }
 #console-collapsed 
 {
@@ -268,9 +276,26 @@
     #explain{
         display:none
     }
+    .mapboxgl-ctrl-geocoder {
+        display: none;
+    }
+    .search-icon {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: white;
+        border-radius: 50%;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 1;
+    }
 }
 #explain{
     bottom:10px;
     right:10px;
     display: none;
+}
+.show-search .mapboxgl-ctrl-geocoder {
+    display: block;
 }

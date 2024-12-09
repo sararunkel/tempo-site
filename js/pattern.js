@@ -23,16 +23,25 @@ let knitColor = [];
 const container = document.getElementById('knit-pattern-container');
 
 function calculateSizes() {
-    const totalColumns = hourStitch*12; //24 columns with 2 stitches for margin on each side
-    const availableWidth = container.offsetWidth
-
-    const knitEllipseSizeY = (availableWidth / totalColumns)/1.4;
+    const totalColumns = hourStitch * 12; // 12 columns for 12 months
+    const totalRows = rows_color; // 8 rows for 8 hours
+    
+    const availableHeight = container.offsetHeight;
+    const labelPaddingX = container.offsetHeight * 0.1; // Space for month labels
+    const labelPaddingY = container.offsetWidth * 0.05; // Space for hour labels
+    const availableWidth = container.offsetWidth-2*labelPaddingX; // Space for hour labels
+    // Calculate the size of each stitch
+    const knitEllipseSizeY = (availableWidth / totalColumns) / 1.4;
     const knitEllipseSizeX = knitEllipseSizeY / 3;
     const knitEllipseSizeZ = knitEllipseSizeY / 3.3;
     const STITCH_HEIGHT = knitEllipseSizeY * 0.8;
-    const canvasWidth = totalColumns * knitEllipseSizeY * 1.4;
-    const canvasHeight = rows_color * STITCH_HEIGHT;
-    return { knitEllipseSizeX, knitEllipseSizeY, knitEllipseSizeZ,canvasWidth, canvasHeight };
+
+    // Calculate the canvas dimensions including space for labels
+    
+    const canvasWidth = totalColumns * knitEllipseSizeY * 1.4 + labelPaddingX;
+    const canvasHeight = totalRows * STITCH_HEIGHT + labelPaddingY;
+
+    return { knitEllipseSizeX, knitEllipseSizeY, knitEllipseSizeZ, canvasWidth, canvasHeight, labelPaddingX, labelPaddingY };
 }
 
 function drawOneKnit(ctx, centerX, centerY, sizes, stitchColor) {
@@ -130,10 +139,11 @@ function setupCanvas() {
         // Clear existing canvas if resizing
         container.removeChild(currentCanvas);
     }
+    const scaleFactor = window.devicePixelRatio;
     const sizes = calculateSizes();
     const canvas = document.createElement('canvas');
-    canvas.width = sizes.canvasWidth
-    canvas.height = sizes.canvasHeight
+    canvas.width = sizes.canvasWidth*scaleFactor
+    canvas.height = sizes.canvasHeight;
     container.appendChild(canvas);
 
     currentCanvas = canvas; // Track the current canvas
@@ -144,20 +154,38 @@ function setupCanvas() {
 function drawPattern() {
     const ctx = setupCanvas();
     const sizes = calculateSizes();
-    const STITCH_WIDTH = sizes.knitEllipseSizeY * 1.4;
+    const { knitEllipseSizeY, canvasWidth, canvasHeight, labelPaddingX, labelPaddingY } = sizes;
+    const STITCH_WIDTH = knitEllipseSizeY * 1.4;
+    const STITCH_HEIGHT = knitEllipseSizeY*0.8;
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const hours = ["8 am", "9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm"];
+    const fontSize = container.offsetWidth * 0.02; // 2% of the container's width
     // Calculate total pattern dimensions
-    let startX =  STITCH_WIDTH/2;
-    const startY = sizes.knitEllipseSizeY/2;
-    // Calculate margins
+    let startX = labelPaddingX + STITCH_WIDTH / 2+fontSize;
+    const startY = labelPaddingY + STITCH_HEIGHT / 2+fontSize;
+    
+    // Draw month labels
+    
+    ctx.font = `${fontSize}px Inter`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    months.forEach((month, index) => {
+        ctx.fillText(month, startX + index * STITCH_WIDTH, labelPaddingY); // Position the label above the grid
+    });
 
+    // Draw hour labels
+    ctx.textAlign = "right";
+    hours.forEach((hour, index) => {
+        ctx.fillText(hour, labelPaddingX+fontSize, startY + index * STITCH_HEIGHT); // Position the label to the left of the grid
+    });
 
+    // Draw the knit grid
     Object.keys(filteredColorsDict).forEach(date => {
         const colors = filteredColorsDict[date];
-        drawKnitGrid(ctx,startX, startY, hourStitch, sizes,colors);
-        startX += hourStitch * STITCH_WIDTH; // Move startX to the right for the next set of columns });
-        });
+        drawKnitGrid(ctx, startX, startY, hourStitch, sizes, colors);
+        startX += hourStitch * STITCH_WIDTH; // Move startX to the right for the next set of columns
+    });
 }
-
 window.addEventListener('resize', () => {
     //resizeContainer();
     //setupCanvas();

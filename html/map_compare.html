@@ -10,6 +10,11 @@
     <link href="https://cdn.syncfusion.com/ej2/27.2.2/ej2-inputs/styles/material.css" rel="stylesheet">
     <link href="https://cdn.syncfusion.com/ej2/27.2.2/ej2-popups/styles/material.css" rel="stylesheet">
     <link href="https://cdn.syncfusion.com/ej2/27.2.2/ej2-buttons/styles/material.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.css" type="text/css">
+
+
+
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.js"></script>
 <script src="https://cdn.syncfusion.com/ej2/27.2.2/dist/ej2.min.js" type="text/javascript"></script>
@@ -62,11 +67,6 @@
 
 
 
-<nav id="listing-group" class="listing-group">
-  <input type="checkbox" id="roadways">
-  <label for="roadways">include roadways</label>
-  <input type="checkbox" id="census">
-  <label for="census">include census data</label>
 
 
 </div>
@@ -145,6 +145,16 @@
 
 
 </div>
+<nav id="listing-group" class="listing-group">
+  <div class="checkbox-container">
+    <input type="checkbox" id="roadways">
+    <label for="roadways">include roadways</label>
+  </div>
+  <div class="checkbox-container">
+    <input type="checkbox" id="census">
+    <label for="census">include census data</label>
+  </div>
+</nav>
 
 </div>
 <!-- TODO: add info icon to bottom right. Create full screen pop=up with info uppon user click -->

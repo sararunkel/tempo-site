@@ -154,6 +154,7 @@ document.getElementById('census').addEventListener('change', (e) => {
         consoleButton.addEventListener('click', () => {
             if (console.classList.contains('console-collapsed')) {
                 console.style.display='block';
+                draggableDiv.style.display = 'block';
                 
                 console.classList.remove('console-collapsed');
                 console.classList.add('console-expanded');
@@ -162,6 +163,7 @@ document.getElementById('census').addEventListener('change', (e) => {
                 console.classList.remove('console-expanded');
                 console.classList.add('console-collapsed');
                 console.style.display = 'none';
+                draggableDiv.style.display = 'none';
                 consoleButton.innerHTML = '<i class="fas fa-window-maximize"></i>';
             }
             consoleContent.style.display = consoleContent.style.display === 'none' ? 'block' : 'none';
