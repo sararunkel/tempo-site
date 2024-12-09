@@ -44,20 +44,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const menu = document.getElementById('menu');
-    const menuToggle = document.getElementById('menu-toggle');
-
-    menuToggle.addEventListener('click', () => {
-        if (window.innerWidth <= 800) {
-            const menuItems = menu.querySelectorAll('a:not(#menu-toggle)');
-            menuItems.forEach(item => {
-                if (item.style.display === 'none' || item.style.display === '') {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
-    });
-});

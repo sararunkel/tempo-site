@@ -7,6 +7,7 @@
     flex-flow: row nowrap;
     justify-content: flex-start;
     align-items: stretch;
+    height:fit-content;
   }
   
   .toggle input {
@@ -59,7 +60,7 @@
     outline-offset: 2px;
   }
   
-  @media (min-width: 800px) {
+  @media (min-width: 768px) {
     .toggle input + label {
       padding: .75rem .25rem;
       flex: 0 0 50%;
@@ -72,3 +73,4 @@
     display: flex;
     justify-content: center;
   }
+

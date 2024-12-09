@@ -15,20 +15,23 @@ const dateList = [
     '2023-09-01', '2023-10-01', '2023-11-01', '2023-12-01',
 ];
 
+const hourStitch=1;
+const rows_color=8;
+
 const filteredColorsDict = {};
 let knitColor = [];
 const container = document.getElementById('knit-pattern-container');
 
 function calculateSizes() {
-    const totalColumns = 28; //24 columns with 2 stitches for margin on each side
+    const totalColumns = hourStitch*12; //24 columns with 2 stitches for margin on each side
     const availableWidth = container.offsetWidth
 
     const knitEllipseSizeY = (availableWidth / totalColumns)/1.4;
     const knitEllipseSizeX = knitEllipseSizeY / 3;
     const knitEllipseSizeZ = knitEllipseSizeY / 3.3;
     const STITCH_HEIGHT = knitEllipseSizeY * 0.8;
-    const canvasWidth = 24 * knitEllipseSizeY * 1.4;
-    const canvasHeight = 12 * STITCH_HEIGHT;
+    const canvasWidth = totalColumns * knitEllipseSizeY * 1.4;
+    const canvasHeight = rows_color * STITCH_HEIGHT;
     return { knitEllipseSizeX, knitEllipseSizeY, knitEllipseSizeZ,canvasWidth, canvasHeight };
 }
 
@@ -69,16 +72,16 @@ function drawKnitGrid(ctx, startX, startY, cols, sizes, knitColors) {
     const STITCH_WIDTH = knitEllipseSizeY * 1.4;
     const STITCH_HEIGHT = knitEllipseSizeY * 0.8;
     const rows = knitColors.length;
+    rows_color
+
 
     for (let row = 0; row < rows; row++) {
         for (let col = 0; col < cols; col++) {
             const colorKey = knitColors[row % knitColors.length]; // Cycle through colors
             const stitchColor = colorDict[colorKey];
             const x = startX + col * STITCH_WIDTH;
-            const y = startY + row * STITCH_HEIGHT;
-
-            drawOneKnit(ctx, x, y, sizes, stitchColor);
-        }
+            const y = startY+ row * STITCH_HEIGHT;
+            drawOneKnit(ctx, x, y, sizes, stitchColor);}
     }
 }
 
@@ -144,14 +147,14 @@ function drawPattern() {
     const STITCH_WIDTH = sizes.knitEllipseSizeY * 1.4;
     // Calculate total pattern dimensions
     let startX =  STITCH_WIDTH/2;
-    const startY = sizes.knitEllipseSizeY * 2;
+    const startY = sizes.knitEllipseSizeY/2;
     // Calculate margins
 
 
     Object.keys(filteredColorsDict).forEach(date => {
         const colors = filteredColorsDict[date];
-        drawKnitGrid(ctx,startX, startY, 2, sizes,colors);
-        startX += 2 * STITCH_WIDTH; // Move startX to the right for the next set of columns });
+        drawKnitGrid(ctx,startX, startY, hourStitch, sizes,colors);
+        startX += hourStitch * STITCH_WIDTH; // Move startX to the right for the next set of columns });
         });
 }
 
@@ -183,8 +186,10 @@ function debounceDrawPattern(newFIPS, delay) {
 
 window.addEventListener('message', (event) => {
     if (event.data && event.data.FIPS) {
+
         // Get the div element where you want to update the data-value attribute
         const newFIPS = event.data.FIPS
+        console.log(newFIPS);
         debounceDrawPattern(newFIPS, 200);
         drawPattern();
     }

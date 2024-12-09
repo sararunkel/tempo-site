@@ -269,3 +269,8 @@
         display:none
     }
 }
+#explain{
+    bottom:10px;
+    right:10px;
+    display: none;
+}

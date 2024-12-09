@@ -134,18 +134,16 @@ document.getElementById('census').addEventListener('change', (e) => {
      
     document.addEventListener('DOMContentLoaded', (event) => {
         const draggableDiv = document.getElementById('draggable-div');
-        const toggleButton = document.getElementById('toggle-button');
         const consoleButton = document.getElementById('console-button');
         const sliderContainer = draggableDiv.querySelector('.slider-container');
         const consoleContent = document.querySelector('.console-content');
         const console = document.getElementById('console');
-        toggleButton.addEventListener('click', () => {
+        consoleButton.addEventListener('click', () => {
             if (sliderContainer.classList.contains('hidden')) {
                 sliderContainer.classList.remove('hidden');
-                toggleButton.innerHTML = '<i class="fas fa-minus"></i>'; 
             } else {
                 sliderContainer.classList.add('hidden');
-                toggleButton.innerHTML = '<i class="fas fa-plus"></i>'; 
+                consoleButton.innerHTML = '<i class="fas fa-plus"></i>'; 
             }
         });
         function positionDraggableDiv() {
@@ -168,6 +166,8 @@ document.getElementById('census').addEventListener('change', (e) => {
             }
             consoleContent.style.display = consoleContent.style.display === 'none' ? 'block' : 'none';
         });
+        //TODO: add sequential instructions for the map settings so the user first selects map, then month then hour. 
+        //Then the date and time will update 
     
         draggableDiv.addEventListener('mousedown', (e) => {
             const rect = draggableDiv.getBoundingClientRect();

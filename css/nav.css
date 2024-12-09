@@ -7,7 +7,8 @@ html, body {
     -webkit-transition: all .8s cubic-bezier(0.54, 0.35, 0.29, 0.99);
     -moz-transition: all .8s cubic-bezier(0.54, 0.35, 0.29, 0.99);
     -o-transition: all .8s cubic-bezier(0.54, 0.35, 0.29, 0.99);  
-    color: #fff;
+    color: #1C5796;
+    background-color: #1C5796;
     overflow-x: hidden; 
     scroll-snap-type: y mandatory;
     box-sizing: border-box;
@@ -67,10 +68,10 @@ html, body {
   }
   
   #p1 { background: #1C5796; }
-  #p2 { background: tomato; }
+  #p2 { background: #1C5796 }
   #p3 { background: gold; }
   #p4 { background: deeppink; }
-  #p5 { background: rebeccapurple; }
+  #p5 { background: #1C5796; }
   
 #t2:not(:target) #p2,
 #t3:not(:target) #p3,
@@ -98,7 +99,8 @@ html, body {
   #t3:target #p1,
   #t4:target #p1,
   #t5:target #p1{
-    background: black;
+    background: #1C5796;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);
   }
   
   #t2:target #p1 .icon, 
@@ -301,7 +303,7 @@ html, body {
 #textile-iframe{
     width:95%;}
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     .ct, .page {
         padding: 0; /* Avoid adding padding that causes overflow */
     }
