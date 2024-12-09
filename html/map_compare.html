@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="../css/button.css">
 <link rel="stylesheet" href="../css/components.css">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 <div id="comparison-container">
@@ -66,16 +67,19 @@
 </div>
 </div>
 </div>
+<div id="console-button" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+  <i class="fas fa-times"></i>
+</div>
 <div id="console">
-  <div class="console-header">
-      <h1>NO<sub>2</sub> Explorer <button id="console-button">-</button></h1>
-  </div>
+  
   <div class="console-content">
-      <hr>
-      <div>
+      
+      <div id="explain">
+        <hr>
           <p align="justify" style="padding-left: 4px;color:rgba(71,71,71,1.00)">Use the sliders to select the month and time to compare NO<sub>2</sub> levels. You can choose to change the data on either the left or right map. Hover over the map for exact values.</p>
+          <hr>
       </div>
-      <hr>
+      
       <div id="poc"><p> </p></div>
       <div class="session">
           <div class="map-legend-container">
@@ -145,6 +149,7 @@
 
 </div>
 
+</div>
 </div>
   <script src="../js/constants.js"></script>
   <script src="../js/map_class.js"></script>

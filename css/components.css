@@ -76,11 +76,12 @@
     position: absolute;
     box-shadow: inset 0 0 0 2px #fff;
     display:flex;
+    top: 30px;
     flex-direction: column;
     width: 300px;
     height: fit-content;
     margin: 10px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     background-color: white;
     overflow-y: auto;
     border-radius: 5px;
@@ -91,9 +92,6 @@
 .selector-container {
     margin-top: 20px;
 }
-.console-header {
-    cursor: pointer;
-}
 
 .console-content {
     flex: 1;
@@ -101,21 +99,31 @@
     height: fit-content;
     transition: height 0.3s ease;
 }
-
+#console-collapsed 
+{
+    display:none
+}
+#console-expanded{
+    display:block
+}
 .console-collapsed .console-content {
+    display:none;
     height: 0;
     padding: 0;
 }
 
 .console-expanded .console-content {
+    display:block;
     height: fit-content;
     padding: 10px; /* Adjust padding as needed */
 }
 
 .console-header {
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: fit-content
 
 }
 #census-colorbar {
@@ -159,12 +167,7 @@
     font-size: 1em;
     cursor: pointer;
 }
-#console-button {
-    background: none;
-    border: none;
-    font-size: 1em;
-    cursor: pointer;
-}
+
 /* For the legend */
 .map-legend {
     height: 8px;
@@ -232,4 +235,37 @@
     display: block;
     line-height: 1;
     position: relative;
+}
+
+
+.console-collapsed {
+    transform: scale(0);
+    opacity: 0;
+}
+
+#console-button.visible {
+    opacity: 1;
+}
+
+.console-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    #console {
+        top:0;
+        width:100vw;
+        margin:0;
+        padding:0;
+    }
+    #explain{
+        display:none
+    }
 }

@@ -142,10 +142,10 @@ document.getElementById('census').addEventListener('change', (e) => {
         toggleButton.addEventListener('click', () => {
             if (sliderContainer.classList.contains('hidden')) {
                 sliderContainer.classList.remove('hidden');
-                toggleButton.textContent = '-';
+                toggleButton.innerHTML = '<i class="fas fa-minus"></i>'; 
             } else {
                 sliderContainer.classList.add('hidden');
-                toggleButton.textContent = '+';
+                toggleButton.innerHTML = '<i class="fas fa-plus"></i>'; 
             }
         });
         function positionDraggableDiv() {
@@ -155,15 +155,16 @@ document.getElementById('census').addEventListener('change', (e) => {
         positionDraggableDiv();
         consoleButton.addEventListener('click', () => {
             if (console.classList.contains('console-collapsed')) {
-                
+                console.style.display='block';
                 
                 console.classList.remove('console-collapsed');
                 console.classList.add('console-expanded');
-                consoleButton.textContent = '-';
+                consoleButton.innerHTML = '<i class="fas fa-times"></i>';
             } else {
                 console.classList.remove('console-expanded');
                 console.classList.add('console-collapsed');
-                consoleButton.textContent = '+';
+                console.style.display = 'none';
+                consoleButton.innerHTML = '<i class="fas fa-window-maximize"></i>';
             }
             consoleContent.style.display = consoleContent.style.display === 'none' ? 'block' : 'none';
         });

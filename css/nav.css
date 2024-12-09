@@ -16,15 +16,7 @@ html, body {
   iframe, img {
     max-width: 100vw; /* Ensure images and iframes do not exceed container width */
     height: auto; /* Maintain aspect ratio */
-}
-@media (max-width: 768px) {
-    .ct, .page {
-        padding: 0; /* Avoid adding padding that causes overflow */
-    }
-    .page iframe {
-        overflow-x: hidden;
-      }
-}
+  }
 
 
 
@@ -74,7 +66,7 @@ html, body {
     transition: transform 1.5s ease, opacity 1s ease;
   }
   
-  #p1 { background: darkslateblue; }
+  #p1 { background: #1C5796; }
   #p2 { background: tomato; }
   #p3 { background: gold; }
   #p4 { background: deeppink; }
@@ -183,9 +175,10 @@ html, body {
     top: 0;
     bottom: 0;
     left: 0;
-    height: 100vh;
+    height: fit-content;
     padding: 0;
     text-align: center;
+    margin:0;
    }
   #menu {
     width:60px;
@@ -293,6 +286,9 @@ html, body {
 #icon-section::-webkit-scrollbar {
     display: none;
 }
+#menu-toggle {
+    display:none
+}
 
 /* Hide scrollbar for IE, Edge and Firefox */
 #icon-section {
@@ -301,4 +297,59 @@ html, body {
     scroll-snap-align: center;
     scroll-padding: 50%;
     overflow-y: scroll;
+}
+#textile-iframe{
+    width:95%;}
+
+@media (max-width: 800px) {
+    .ct, .page {
+        padding: 0; /* Avoid adding padding that causes overflow */
+    }
+    .page iframe {
+        overflow-x: hidden;
+      }
+    /* Active page styling */
+    #t2:target #p2,
+    #t3:target #p3,
+    #t4:target #p4,
+    #t5:target #p5 {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto; /* Enable interaction */
+    transform: translateX(calc(-200%)); /* Move into view */
+    transition: transform 1.5s ease, opacity 1.5s ease;
+    }
+    #menu-toggle {
+        display: block;
+    }
+    #menu a:not(#menu-toggle) {
+        display: none;
+    }
+        /* Show menu toggle button on mobile */
+    /* Show menu toggle button on mobile */
+
+    /* Hide navbar on mobile */
+    img#uno {
+        width:50px
+      }
+      li#oneicon.icon{
+        margin:8px 0px
+      }
+      #menu {
+        width:50px;
+        /* background-color: rgb(102,51,153,0.3); */
+        border-radius: 2px;
+      }
+      #menu .icon {
+        margin: 10px 2px;}
+        .icon {
+            color: #fff;
+            font-size: 15px;
+            display: block;
+          }
+          
+    #textile-iframe {
+        width:100%;
+    }
+
 }

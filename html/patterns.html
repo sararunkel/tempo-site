@@ -8,6 +8,7 @@
     <link href="https://cdn.syncfusion.com/ej2/27.2.2/ej2-buttons/styles/material.css" rel="stylesheet">
     <script src="https://cdn.syncfusion.com/ej2/27.2.2/dist/ej2.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.syncfusion.com/ej2/syncfusion-helper.js" type ="text/javascript"></script>
     <link rel="stylesheet" href="../css/pagestyle.css">
     <link rel="stylesheet" href="../css/components.css">
@@ -24,14 +25,20 @@
             height: 100vh;
             scroll-snap-type: y mandatory;
             overflow-y: scroll;
+            display:flex;
+            flex-direction:column;
+            justify-content: center;
+            width:100%;
+            overflow-x:hidden;
         }
         .section {
-            height: 100vh;
-            scroll-snap-align: start;
+            height: 90%;
+            scroll-snap-align: center;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 2em;
+            width:98%
         }
         .section:nth-child(odd) {
             background-color: white;
@@ -43,13 +50,17 @@
 </head>
 <body>
     <div class="container">
-        <div class="section">Intro</div>
-        <div class="section">
-            <iframe src="displaymap.html" style="width:100%;height:95%; border: none;"></iframe>
-
+        <div class="mobile-logo"><img src="../images/logo_climatethreads.png" id="uno" style="filter: invert(1);"></div>
+        <div class="section"><h1>Welcome to ClimateThreads</h1></div> 
+        <div class="smog" style="position:relative"><img src="../images/smog-den.png" id="smog-img" style="width:100%">
+        <h2 id="badair">Are you breathing bad air?</h2></div>
+        <!-- TODO: center text -->
+        <div class="section" style="position:relative">
+            <iframe src="displaymap.html" style="width:100%;height:90%; border: none;"></iframe>
+            <div id="knit-pattern-container" class="overlay" style="width:100%; height:auto; z-index: 1000; position: absolute;top:0; background-color:white;pointer-events: none;"></div>
         </div>
         <div class="section" style="display:flex;flex-direction: column;">    
-            <div id="knit-pattern-container" style="width: 100%;"></div></div>
+            <!-- <div id="knit-pattern-container" style="width: 100%;"></div></div> -->
 
         <div class="section">Section 3</div>
     </div>

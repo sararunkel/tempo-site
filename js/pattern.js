@@ -26,8 +26,10 @@ function calculateSizes() {
     const knitEllipseSizeY = (availableWidth / totalColumns)/1.4;
     const knitEllipseSizeX = knitEllipseSizeY / 3;
     const knitEllipseSizeZ = knitEllipseSizeY / 3.3;
+    const STITCH_HEIGHT = knitEllipseSizeY * 0.8;
     const canvasWidth = 24 * knitEllipseSizeY * 1.4;
-    return { knitEllipseSizeX, knitEllipseSizeY, knitEllipseSizeZ,canvasWidth};
+    const canvasHeight = 12 * STITCH_HEIGHT;
+    return { knitEllipseSizeX, knitEllipseSizeY, knitEllipseSizeZ,canvasWidth, canvasHeight };
 }
 
 function drawOneKnit(ctx, centerX, centerY, sizes, stitchColor) {
@@ -85,11 +87,15 @@ function fetchCSVFile(filePath) {
         .then(response => response.text())
         .then(csvData => {
             knitColor = parseCSV(csvData);
-            dateList.forEach(date => {
-                filteredColorsDict[date] = filterColors(knitColor, 8035014107, date);
-            });
         })
         .catch(error => console.error('Error fetching the CSV file:', error));
+}
+
+function updateFilteredColorsDict(newFIPS) {
+    dateList.forEach(date => {
+        filteredColorsDict[date] = filterColors(knitColor, newFIPS, date);
+    });
+    drawPattern();
 }
 
 function filterColors(data, filterValue, dateValue) {
@@ -124,7 +130,7 @@ function setupCanvas() {
     const sizes = calculateSizes();
     const canvas = document.createElement('canvas');
     canvas.width = sizes.canvasWidth
-    canvas.height = container.offsetHeight;
+    canvas.height = sizes.canvasHeight
     container.appendChild(canvas);
 
     currentCanvas = canvas; // Track the current canvas
@@ -135,12 +141,8 @@ function setupCanvas() {
 function drawPattern() {
     const ctx = setupCanvas();
     const sizes = calculateSizes();
-    const rows = 8;
-    const cols = 24;
     const STITCH_WIDTH = sizes.knitEllipseSizeY * 1.4;
-    const STITCH_HEIGHT = sizes.knitEllipseSizeY * 0.8;
     // Calculate total pattern dimensions
-    const totalPatternWidth = cols * STITCH_WIDTH;
     let startX =  STITCH_WIDTH/2;
     const startY = sizes.knitEllipseSizeY * 2;
     // Calculate margins
@@ -153,40 +155,37 @@ function drawPattern() {
         });
 }
 
-
-
-function resizeContainer() {
-    const totalColumns = 24;
-    const stitchWidth = 20; // Fixed stitch width
-    const stitchHeight = stitchWidth * 0.8; // Maintain aspect ratio
-    const totalRows = 8; // Number of rows
-
-    const totalMargin = 40; // Total margin (20px on each side)
-    const requiredWidth = totalColumns * stitchWidth + totalMargin;
-    const requiredHeight = totalRows * stitchHeight + totalMargin;
-
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-
-    // Fit within screen dimensions
-    const finalWidth = Math.min(screenWidth, requiredWidth);
-    const finalHeight = Math.min(screenHeight, requiredHeight);
-
-    container.style.width = `${finalWidth}px`;
-    container.style.height = `${finalHeight}px`;
-    container.style.margin = '0 auto'; // Center horizontally
-}
 window.addEventListener('resize', () => {
     //resizeContainer();
     //setupCanvas();
     drawPattern(); // Redraw the pattern after resizing
 });
 //Draw the pattern initially
-drawPattern();
 // Call it initially to set the correct size
 //resizeContainer();
 
 // Fetch the CSV file on page load
 fetchCSVFile('../data/monthly/filtered_data_with_colors.csv').then(() => {
+    //get data-value from infoDiv
+    const newFIPS = 8035014116;
+    updateFilteredColorsDict(newFIPS);
     drawPattern(); // Draw the pattern after fetching the CSV file
+});
+
+let debounceTimeout;
+function debounceDrawPattern(newFIPS, delay) {
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
+        updateFilteredColorsDict(newFIPS);
+        drawPattern();
+    }, delay);
+}
+
+window.addEventListener('message', (event) => {
+    if (event.data && event.data.FIPS) {
+        // Get the div element where you want to update the data-value attribute
+        const newFIPS = event.data.FIPS
+        debounceDrawPattern(newFIPS, 200);
+        drawPattern();
+    }
 });

@@ -132,4 +132,3 @@ class SliderComponent {
 //     rangeObj.dataBind();
 //     updateData()
 // }
-

@@ -127,7 +127,10 @@ class MapInitializer {
                     this.income = e.features[0].properties.MedianIncome;
                     this.age = e.features[0].properties.MedianAge;
                     this.poverty = e.features[0].properties.PercentPoverty;
+                    const FIPSValue = e.features[0].properties.FIPS;
 
+                    // Get the div element where you want to display the FIPS value
+                    window.parent.postMessage({ FIPS: FIPSValue }, '*');
 
                     
                 }
