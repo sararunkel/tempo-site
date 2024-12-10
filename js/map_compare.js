@@ -137,7 +137,7 @@ document.getElementById('census').addEventListener('change', (e) => {
      
     document.addEventListener('DOMContentLoaded', (event) => {
         const draggableDiv = document.getElementById('draggable-div');
-        const consoleButton = document.getElementById('console-button');
+        const consoleButton = document.getElementById('console-button-icon');
         const sliderContainer = draggableDiv.querySelector('.slider-container');
         const consoleContent = document.querySelector('.console-content');
         const console = document.getElementById('console');

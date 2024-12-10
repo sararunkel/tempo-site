@@ -285,6 +285,11 @@
         -ms-border-radius: 0;
         -o-border-radius: 0;
 }
+#console-button{
+    display:flex;
+    flex-direction: row;
+    width:100vw;
+}
     #comparison-container{
         height: 94vh;
         top: 6vh;
@@ -298,6 +303,12 @@
         position: absolute;
         cursor: move;
         z-index: 1000;
+}
+#mobile-datetime{
+    display:bock;
+    width:94vw;
+    right:0;
+    top:0
 }
     .draggable{
         width: 100vw;

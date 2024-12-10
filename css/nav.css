@@ -429,7 +429,7 @@ mapboxgl-popup-content {
       align-content: center;
   }
   #about{
-    width: 100vw; height: 94vh; border: none;
+    width: 100vw; height: 100%; border: none;
 }
   #bottom-menu .icon {
     display:block;

@@ -216,7 +216,8 @@ p {
     padding:1vh;
     border-radius: 2px;
     top: 1vh;
-    left: 1vh;
+    height:3vh;
+    left: 0;
     z-index: 1000;
     background-color: rgba(255, 255, 255, 0.8);
     border: none;
@@ -255,6 +256,9 @@ p {
     color: #666; /* Adjust as needed */
 }
 @media (max-width: 768px) {
+    .DateTime-container{
+        display:none;
+    }
 
     #overlay-text {
         top: 1vh;

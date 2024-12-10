@@ -39,7 +39,6 @@
             filter: invert(1);
         }
         .section {
-            height: 90%;
             scroll-snap-align: start;
             display: flex;
             justify-content: center;
@@ -179,6 +178,42 @@ canvas{
     padding:0;
     margin:0;
 }
+.content-blocks {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .content-block {
+            flex: 1 1 calc(33.333% - 40px);
+            margin: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .content-block img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .content-block h3 {
+            margin: 0;
+            padding: 10px;
+            background: #A52747;
+            color: white;
+            text-align: center;
+        }
+        .content-block:hover {
+            transform: translateY(-10px);
+        }
+        #fabric-section{
+            display:flex;
+            flex-direction: column;
+        }
 @media (max-width: 768px) {
     .team-members {
         grid-template-columns: 1fr;
@@ -200,6 +235,12 @@ canvas{
     #knit-section{
         width: 100%;
     }
+    .content-blocks{
+        display:grid;
+        grid-template-columns: 1fr;}
+    .content-block {
+                flex: 1 1 100%;
+            }
 }
         
     </style>
@@ -253,8 +294,23 @@ canvas{
         </div>
 
         <!-- Section 5 -->
-        <div class="section">
+        <div class="section" id="fabric-section">
             <h2>Fabric Showcase</h2>
+            <div class="content-blocks">
+                <div class="content-block">
+                    <img src="../images/fabric.jpg" alt="Fabric 1">
+                    <h3>Yarn Selection</h3>
+                </div>
+                <div class="content-block">
+                    <img src="../images/closeup.jpg" alt="Fabric 2">
+                    <h3>One Month Representation</h3>
+                </div>
+                <div class="content-block">
+                    <img src="../images/stitching.jpg" alt="Fabric 3">
+                    <h3>Stitching it together</h3>
+                </div>
+            </div>
+
         </div>
     </div>
 
