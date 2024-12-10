@@ -405,7 +405,7 @@ html, body {
     display: none;
     background-color: #1C5796;
     position: fixed;
-    top: 94vh;
+    top: 93vh;
     height: 6vh;
     width: 100%;
     z-index: 1000;
@@ -421,7 +421,16 @@ html, body {
     display:block;
     color: white; /* Adjust icon color as needed */
   }
-
+  .bottom-menu-home {
+    background-color: #A52747; /* Color for home page */
+  }
+  
+  .bottom-menu-map {
+    background-color: #6f518a; /* Color for about page */
+  }
+  .bottom-menu-about {
+    background-color: #1C5796; /* Color for contact page */
+  }
   /* Hide the existing menu on mobile devices */
   #menu {
       display: none;

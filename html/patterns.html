@@ -69,7 +69,7 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            height:50vw;
+            height:50vh;
         }
         .iframe-container iframe {
             width: 100%;
@@ -79,7 +79,7 @@
         }
         .pattern-container {
             width: 100%;
-            height: auto;
+            height: 50vh;
             background-color: white;
             z-index: 1000;
             pointer-events: none;
@@ -128,10 +128,15 @@
 }
 
 #map2 {
+    text-align:left;
+
     top: 0; /* Adjust position */
+    left:0;
+    margin:0;
+    padding:1vw;
     font-size: 2vw; /* Responsive font size */
     font-weight: 400;
-    width: 80%;
+    width: 50%;
     background-color: rgba(0, 0, 0, 0.5);
 }
 /* Add styling for the pattern container */
@@ -158,6 +163,15 @@ canvas{
 .container {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+}
+#knit-section{
+    height: 50vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #1c5796;
 }
 @media (max-width: 768px) {
     .team-members {
@@ -208,13 +222,22 @@ canvas{
 
         <!-- Section 3: Map -->
         <div class="section iframe-container">
-            <iframe src="displaymap.html" title="Climate Map"></iframe>
-            <!-- <h2 id="map1">Knit your data</h2> -->
-            <h3 id="map2">Click on a census tract or enter your address to generate a knitting pattern of your air quality throughout the year</h3>
+                <!-- Section 1: FIPS 8031980200 -->
+            <div class="section iframe-container" id="section-8031980200">
+                <iframe src="displaymap.html?FIPS=8031980200" id="display-8031980200" title="Climate Map 8031980200"></iframe>
+            </div>
+
+            <!-- Section 2: FIPS 8031981234 -->
+            <div class="section iframe-container" id="section-8013012206">
+                <iframe src="displaymap.html?FIPS=8013012206" id="display-8013012206" title="Climate Map 8031981234"></iframe>
+            </div>
+            <!-- <iframe src="displaymap.html?FIPS=8031980200" id="display" title="Climate Map"></iframe> -->
         </div>
 
         <!-- Section 4: Knit Pattern -->
-        <div class="section">
+        <div class="section" id="knit-section">
+            <h2 id="label-knit">Census Tract 9802; Denver County; Colorado
+            </h2>
             <div id="knit-pattern-container" ></div>
         </div>
 

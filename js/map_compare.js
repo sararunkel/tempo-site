@@ -81,18 +81,16 @@ function updateCompareInstance(before, after) {
 }
 document.getElementById('census').addEventListener('change', function() {
     const dropdownContainer = document.getElementById('census-dropdown-container');
-    const selectorContainer = document.querySelector('.selector-container');
+    const selectorContainer = document.querySelector('#select-maps');
     const legendContainer = document.getElementById('#census-colors');
     if (this.checked) {
         console.log('Using census dat')
         dropdownContainer.style.display = 'block';
-        selectorContainer.classList.add('hidden');
-        legendContainer.style.display = 'block';
+        selectorContainer.style.display = 'none';
         document.querySelector('input[name="mapSelector"][value="left"]').checked = true;
     } else {
         dropdownContainer.style.display = 'none';
-        legendContainer.style.display = 'none';
-        selectorContainer.classList.remove('hidden');
+        selectorContainer.style.display = 'block';
     }
 });
 
@@ -153,7 +151,7 @@ document.getElementById('census').addEventListener('change', (e) => {
         });
         function positionDraggableDiv() {
             const consoleHeight = console.offsetHeight;
-            draggableDiv.style.top = (consoleHeight + 50) + 'px';
+            draggableDiv.style.top = (consoleHeight) + 'px';
         }
         positionDraggableDiv();
         consoleButton.addEventListener('click', () => {

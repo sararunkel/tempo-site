@@ -15,8 +15,11 @@ const dateList = [
     '2023-09-01', '2023-10-01', '2023-11-01', '2023-12-01',
 ];
 
+let selectedDate = '01';  // To store the selected date
+let selectedTime = 8;  
 const hourStitch=1;
 const rows_color=8;
+let clickedStitch = null; // To track the clicked stitch
 
 const filteredColorsDict = {};
 let knitColor = [];
@@ -81,7 +84,6 @@ function drawKnitGrid(ctx, startX, startY, cols, sizes, knitColors) {
     const STITCH_WIDTH = knitEllipseSizeY * 1.4;
     const STITCH_HEIGHT = knitEllipseSizeY * 0.8;
     const rows = knitColors.length;
-    rows_color
 
 
     for (let row = 0; row < rows; row++) {
@@ -148,7 +150,71 @@ function setupCanvas() {
 
     currentCanvas = canvas; // Track the current canvas
     currentCtx = canvas.getContext('2d'); // Track the current context
+    canvas.addEventListener('click', handleCanvasClick);
+    canvas.addEventListener('mousemove', handleCanvasMouseMove);
+
     return currentCtx;
+}
+function handleCanvasClick(event) {
+    const sizes = calculateSizes();
+    const { knitEllipseSizeY, labelPaddingX, labelPaddingY } = sizes;
+    const STITCH_WIDTH = knitEllipseSizeY * 1.4;
+    const STITCH_HEIGHT = knitEllipseSizeY * 0.8;
+    const fontSize = container.offsetWidth * 0.02; // 2% of the container's width
+    const startX = labelPaddingX + fontSize;
+    const startY = labelPaddingY + fontSize;
+
+    const rect = currentCanvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    console.log('x:', x, 'y:', y);
+
+    const column = Math.floor((x - startX) / STITCH_WIDTH);
+    const row = Math.floor((y - startY) / STITCH_HEIGHT);
+
+    if (column >= 0 && column < 12 && row >= 0 && row < 8) {
+        const months = [1,2,3,4,5,6,7,8,9,10,11,12];
+        const hours = [8, 9, 10, 11, 12, 13, 14, 15];
+
+        const selectedMonth = months[column];
+        const selectedHour = hours[row];
+        selectedDate = selectedMonth;
+        selectedTime = selectedHour;
+
+        // document.getElementById('date-value').textContent = selectedMonth;
+        // document.getElementById('time-value').textContent = selectedHour;
+        // Send the selectedMonth and selectedHour to the iframe
+        const iframe = document.getElementById('display'); // Replace with your iframe's ID
+        iframe.contentWindow.postMessage({ selectedMonth, selectedHour }, '*');
+        // Track the clicked stitch
+        clickedStitch = { column, row };
+
+        // Redraw the pattern to show the outline
+        drawPattern();
+    }
+}
+
+function handleCanvasMouseMove(event) {
+    const sizes = calculateSizes();
+    const { knitEllipseSizeY, labelPaddingX, labelPaddingY } = sizes;
+    const STITCH_WIDTH = knitEllipseSizeY * 1.4;
+    const STITCH_HEIGHT = knitEllipseSizeY * 0.8;
+    const fontSize = container.offsetWidth * 0.02; // 2% of the container's width
+    const startX = labelPaddingX + fontSize;
+    const startY = labelPaddingY + fontSize;
+
+    const rect = currentCanvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    const column = Math.floor((x - startX) / STITCH_WIDTH);
+    const row = Math.floor((y - startY) / STITCH_HEIGHT);
+
+    if (column >= 0 && column < 12 && row >= 0 && row < 8) {
+        currentCanvas.style.cursor = 'pointer';
+    } else {
+        currentCanvas.style.cursor = 'default';
+    }
 }
 
 function drawPattern() {
@@ -178,6 +244,13 @@ function drawPattern() {
     hours.forEach((hour, index) => {
         ctx.fillText(hour, labelPaddingX+fontSize, startY + index * STITCH_HEIGHT); // Position the label to the left of the grid
     });
+    if (clickedStitch) {
+        const outlineX = startX + clickedStitch.column * STITCH_WIDTH;
+        const outlineY = startY + clickedStitch.row * STITCH_HEIGHT;
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(outlineX - STITCH_WIDTH / 2, outlineY - STITCH_HEIGHT / 2, STITCH_WIDTH, STITCH_HEIGHT);
+    }
 
     // Draw the knit grid
     Object.keys(filteredColorsDict).forEach(date => {
@@ -185,6 +258,7 @@ function drawPattern() {
         drawKnitGrid(ctx, startX, startY, hourStitch, sizes, colors);
         startX += hourStitch * STITCH_WIDTH; // Move startX to the right for the next set of columns
     });
+    // Draw the outline for the clicked stitch
 }
 window.addEventListener('resize', () => {
     //resizeContainer();
@@ -217,8 +291,31 @@ window.addEventListener('message', (event) => {
 
         // Get the div element where you want to update the data-value attribute
         const newFIPS = event.data.FIPS
-        console.log(newFIPS);
-        debounceDrawPattern(newFIPS, 200);
+        debounceDrawPattern(newFIPS, 0);
         drawPattern();
+        const tractLabel = document.getElementById('label-knit');
+        if (tractLabel) {
+            tractLabel.textContent = event.data.TRACT;
+        }
+        console.log(event.data.TRACT)
+        }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the URL parameters from the main page
+    const urlParams = new URLSearchParams(window.parent.location.search);
+    const fips = urlParams.get('FIPS');
+
+    if (fips === '8031980200') {
+        document.getElementById('section-8031980200').style.display = 'block';
+        document.getElementById('section-8013012206').style.display = 'none';
+    } else if (fips === '8013012206') {
+        document.getElementById('section-8031980200').style.display = 'none';
+        document.getElementById('section-8013012206').style.display = 'block';
+        document.getElementById('label-knit').textContent='Census Tract 122.06; Boulder County; Colorado'
+    } else {
+        // Default behavior if no FIPS parameter is provided
+        document.getElementById('section-8031980200').style.display = 'block';
+        document.getElementById('section-8031981234').style.display = 'none';
     }
 });

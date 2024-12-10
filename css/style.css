@@ -214,7 +214,6 @@ p {
     width:fit-content;
     height:fit-content;
     padding:1vh;
-    margin:1vh;
     border-radius: 2px;
     top: 1vh;
     left: 1vh;
@@ -227,5 +226,31 @@ p {
     cursor: pointer;
     opacity: 1;
     transition: opacity 0.5s ease;
+    -webkit-transition: opacity 0.5s ease;
+    -moz-transition: opacity 0.5s ease;
+    -ms-transition: opacity 0.5s ease;
+    -o-transition: opacity 0.5s ease;
 }
 
+#overlay-text {
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    padding: 10px;
+    border-radius: 5px;
+    width: 60vw;
+    z-index: 1; /* Ensure it is above the map */
+}
+
+#overlay-text h2 {
+    margin: 0;
+    font-size: 3vw; /* Adjust as needed */
+    color: #333; /* Adjust as needed */
+}
+
+#overlay-text p {
+    margin: 5px 0 0;
+    font-size: 2vw; /* Adjust as needed */
+    color: #666; /* Adjust as needed */
+}

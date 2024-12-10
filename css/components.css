@@ -87,8 +87,7 @@
     flex-direction: column;
     width: 300px;
     height: fit-content;
-    margin: 10px;
-    padding: 10px 10px;
+    padding: 3vh;
     background-color: white;
     overflow-y: auto;
     border-radius: 5px;
@@ -124,7 +123,7 @@
 .console-expanded .console-content {
     display:block;
     height: fit-content;
-    padding: 10px; /* Adjust padding as needed */
+    padding: 0; /* Adjust padding as needed */
 }
 
 .console-header {
@@ -279,9 +278,7 @@
     #console {
         top:0;
         width:100vw;
-        height:20vh;
-        margin:0;
-        padding:0;
+        height:auto;
         border-radius: 0;
         -webkit-border-radius: 0;
         -moz-border-radius: 0;
@@ -289,11 +286,30 @@
         -o-border-radius: 0;
 }
     #comparison-container{
-        height:80vh;
+        height:93vh;
         position: relative;
-        top:20vh;
+        /* top:20vh; */
     }
-    
+    #draggable-div {
+        width: 100vw;
+        border: 1px solid #ffffff;
+        background-color: #ffffff;
+        position: absolute;
+        cursor: move;
+        z-index: 1000;
+}
+    .draggable{
+        width: 100vw;
+        left:0;
+        border-radius:0;
+        position: absolute;
+        cursor: move;
+        z-index: 1000;
+        -webkit-border-radius:0;
+        -moz-border-radius:0;
+        -ms-border-radius:0;
+        -o-border-radius:0;
+}
     #explain{
         display:none
     }

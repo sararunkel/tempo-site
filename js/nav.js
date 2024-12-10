@@ -41,6 +41,16 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
+        const bottomMenu = document.getElementById('bottom-menu');
+        const currentPage = window.location.pathname;
+
+        if (currentPage.includes('#t2')) {
+            bottomMenu.classList.add('bottom-menu-home');
+        } else if (currentPage.includes('t3')) {
+            bottomMenu.classList.add('bottom-menu-maps');
+        } else if (currentPage.includes('about')) {
+            bottomMenu.classList.add('bottom-menu-about');
+        }
 
 });
 

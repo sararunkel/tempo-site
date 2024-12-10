@@ -20,6 +20,10 @@ class MapInitializer {
         this.age=0;
         this.poverty=0;
     }
+    getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
 
     initializeMap() {
         this.map = new mapboxgl.Map({
@@ -27,16 +31,68 @@ class MapInitializer {
             style: this.style,
             center: this.center,
             zoom: this.zoom,
-            projection: this.projection
+            projection: this.projection,
         });
 
         this.map.setMaxBounds(this.bounds);
+        
 
         this.map.on('load', () => {
             this.addSource();
             this.addLayers();
             this.addMapControls();
             this.addEventListeners();
+
+            const featureId = this.getQueryParam('FIPS');
+            console.log(featureId)
+            const features = this.map.queryRenderedFeatures({ layers: ['tract-layer'] });
+            if (featureId) {
+                this.map.on('idle', () => {
+                    const features = this.map.queryRenderedFeatures({ layers: ['tract-layer'] });
+
+                    let targetFeature = features.find(f => {
+                        //console.log('Feature Properties:', f);
+                        if (parseInt(f.properties.FIPS) === parseInt(featureId)) {
+                            return f;
+                        }
+                    });
+                    console.log(targetFeature)
+                    if (targetFeature) {
+                        const coordinates = targetFeature.geometry.coordinates.slice();
+                        const bounds = new mapboxgl.LngLatBounds();
+            
+                        // Calculate the bounding box of the feature
+                        targetFeature.geometry.coordinates[0].forEach((coord)=> {
+                            bounds.extend(coord);
+                        });
+            
+                        // Use the flyTo method to zoom in on the feature
+                        this.map.flyTo({
+                            center: bounds.getCenter(),
+                            zoom: 10, // Adjust the zoom level as needed
+                            speed: 2, // Adjust the speed of the zoom
+                            curve: 1, // Adjust the curve of the zoom
+                            easing: (t) => t
+                        });
+                        // Set the feature state for the clicked feature
+                        if (this.clickedStateId !== null) {
+                            this.map.setFeatureState(
+                                { source: 'us-data', id: this.clickedStateId },
+                                { clicked: false }
+                            );
+                        }
+                        this.clickedStateId = targetFeature.id;
+                        this.map.setFeatureState(
+                            { source: 'us-data', id: this.clickedStateId },
+                            { clicked: true }
+                        );
+                    } else {
+                        console.error('Feature not found.');
+                    }
+                });
+            } else {
+                console.log('No feature ID provided in query parameters.');
+            }
         });
     }
 
@@ -63,7 +119,7 @@ class MapInitializer {
                     ['interpolate', ['linear'], ['get', this.var], ...this.stops]
                 ]
             }
-        });
+        },'ferry');
         this.map.addLayer({
             'id': 'tract-lines',
             'type': 'line',
@@ -74,12 +130,14 @@ class MapInitializer {
             'line-color': '#000000',
             'line-width': [
                 'case',
+                ['boolean', ['feature-state', 'clicked'], false],
+                5,
                 ['boolean', ['feature-state', 'hover'], false],
                 3,
                 0
                 ]
             }
-            });
+            },'admin-1-boundary-bg');
 
         // Add other layers as needed
     }
@@ -110,8 +168,41 @@ class MapInitializer {
             // });
 
     }
-
+    
     addEventListeners() {
+        this.map.on('click', 'tract-layer', (e) =>{
+            if (e.features.length > 0) {
+                const feature = e.features[0];
+                const coordinates = feature.geometry.coordinates.slice();
+                const bounds = new mapboxgl.LngLatBounds();
+    
+                // Calculate the bounding box of the feature
+                feature.geometry.coordinates[0].forEach((coord)=> {
+                    bounds.extend(coord);
+                });
+    
+                // Use the flyTo method to zoom in on the feature
+                this.map.flyTo({
+                    center: bounds.getCenter(),
+                    zoom: 10, // Adjust the zoom level as needed
+                    speed: 2, // Adjust the speed of the zoom
+                    curve: 1, // Adjust the curve of the zoom
+                    easing: (t) => t
+                    })
+            // Set the feature state for the clicked feature
+            if (this.clickedStateId !== null) {
+                this.map.setFeatureState(
+                    { source: 'us-data', id: this.clickedStateId },
+                    { clicked: false }
+                );
+            }
+            this.clickedStateId = feature.id;
+            this.map.setFeatureState(
+                { source: 'us-data', id: this.clickedStateId },
+                { clicked: true }
+            );
+            }
+        });
         this.map.on('mousemove', 'tract-layer', (e) => {
             this.map.getCanvas().style.cursor = 'pointer';
 
@@ -156,14 +247,17 @@ class MapInitializer {
                     this.age = e.features[0].properties.MedianAge;
                     this.poverty = e.features[0].properties.PercentPoverty;
                     const FIPSValue = e.features[0].properties.FIPS;
-
-                    // Get the div element where you want to display the FIPS value
-                    window.parent.postMessage({ FIPS: FIPSValue }, '*');
+                    
 
                     
                 }
             });
-    
+            this.map.on('click', 'tract-layer', (e) => {
+                if (e.features.length > 0) {
+                const FIPSValue = e.features[0].properties.FIPS;
+                window.parent.postMessage({ FIPS: FIPSValue,TRACT: this.TRACT }, '*');
+                }
+            });
 
         this.map.on('mouseleave', 'tract-layer', () => {
             if (this.hoveredStateId !== null) {
@@ -176,8 +270,7 @@ class MapInitializer {
             this.hoveredStateId = null;
             this.popup.remove()
             });
-            
-        // Add event listeners as needed
+    
     }
     
     changeVariable(newVariable, newStops) {
@@ -197,6 +290,7 @@ class MapInitializer {
     getMap() {
         return this.map;
     }
+
 }
 
 // Usage

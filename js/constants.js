@@ -1,6 +1,6 @@
 const zoomThresh = 5;
-const firstSymbolId = 'bridge-rail';//'road-simple'; 
-const firstSymbolId2 = 'bridge-rail';//'road-simple';
+const firstSymbolId = 'ferry';//'road-simple'; 
+const firstSymbolId2 = 'ferry';//'road-simple';
 const project ='albers'
 const mapCenter = [-105, 40];
 const mapZoom = 8;
