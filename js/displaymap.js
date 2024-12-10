@@ -99,7 +99,7 @@ function updateLabels(month,hour,year) {
     let timeLabels = ['8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM'];
     const monthLabel = monthArr[month - 1];
     const timeLabel = timeLabels[hour-8];
-    document.getElementById('map-title').innerHTML = `Average NO<sub>2</sub> at ${timeLabel} on ${monthLabel}, ${year} `;
+    document.getElementById('map-title').innerHTML = `Average NO<sub>2</sub> at ${timeLabel} in ${monthLabel}, ${year} `;
 
 }
 

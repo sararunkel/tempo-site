@@ -33,6 +33,7 @@
             align-items: center;
             width: 96vw;
             margin:2vw;
+            overflow-x:hidden
         }
         .mobile-logo img {
             height: 20vh;
@@ -40,7 +41,7 @@
         }
         .section {
             height: 90%;
-            scroll-snap-align: top;
+            scroll-snap-align: start;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -52,7 +53,7 @@
         }
         .section.welcome {
             flex-direction:column;
-            text-align:left;
+            text-align:center;
             padding: 20px;
         }
         .section:nth-child(odd) {
@@ -165,13 +166,18 @@ canvas{
     scrollbar-width: none;  /* Firefox */
 }
 #knit-section{
-    height: 50vh;
-    width: 100%;
+    height: auto;
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: #1c5796;
+}
+#label-knit{
+    font-size: 2.5vw;
+    padding:0;
+    margin:0;
 }
 @media (max-width: 768px) {
     .team-members {
@@ -238,6 +244,7 @@ canvas{
         <div class="section" id="knit-section">
             <h2 id="label-knit">Census Tract 9802; Denver County; Colorado
             </h2>
+            <p style="font-size:2vw; margin:0">Click on knitting pattern to change the data in the map to that month and time.</p>
             <div id="knit-pattern-container" ></div>
         </div>
 

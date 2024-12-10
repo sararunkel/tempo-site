@@ -144,7 +144,7 @@ function setupCanvas() {
     const scaleFactor = window.devicePixelRatio;
     const sizes = calculateSizes();
     const canvas = document.createElement('canvas');
-    canvas.width = sizes.canvasWidth*scaleFactor
+    canvas.width = sizes.canvasWidth;
     canvas.height = sizes.canvasHeight;
     container.appendChild(canvas);
 
@@ -184,8 +184,13 @@ function handleCanvasClick(event) {
         // document.getElementById('date-value').textContent = selectedMonth;
         // document.getElementById('time-value').textContent = selectedHour;
         // Send the selectedMonth and selectedHour to the iframe
-        const iframe = document.getElementById('display'); // Replace with your iframe's ID
-        iframe.contentWindow.postMessage({ selectedMonth, selectedHour }, '*');
+        const iframe = document.getElementById('display-8031980200'); 
+        if (iframe){// Replace with your iframe's ID
+        iframe.contentWindow.postMessage({ selectedMonth, selectedHour }, '*');}
+        else{
+            const iframe = document.getElementById('display-8013012206'); 
+            iframe.contentWindow.postMessage({ selectedMonth, selectedHour }, '*');
+        }
         // Track the clicked stitch
         clickedStitch = { column, row };
 
@@ -316,6 +321,6 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         // Default behavior if no FIPS parameter is provided
         document.getElementById('section-8031980200').style.display = 'block';
-        document.getElementById('section-8031981234').style.display = 'none';
+        document.getElementById('section-8013012206').style.display = 'none';
     }
 });

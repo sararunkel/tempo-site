@@ -250,7 +250,7 @@ p {
 }
 
 #overlay-text p {
+    font: 2vw/2 'Inter', sans-serif; /* Adjust as needed */
     margin: 5px 0 0;
-    font-size: 2vw; /* Adjust as needed */
     color: #666; /* Adjust as needed */
 }
