@@ -344,6 +344,8 @@ html, body {
     #t3:target #p3,
     #t4:target #p4,
     #t5:target #p5 {
+    height:94vh;
+    top:6vh;
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -384,7 +386,9 @@ html, body {
           }
           
     #textile-iframe {
-        width:93vh;
+        width:100vw;
+        height: 94vh;
+        top:6vh;
     }
 
 }/* Default styles for the bottom menu (hidden by default) */
@@ -398,25 +402,35 @@ html, body {
   color: white; /* Adjust icon color as needed */
   font-size: 4vh; /* Adjust icon size as needed */
 }
+mapboxgl-popup-content {
+    width: fit-content;
+    font-size: 3vw;
+
+
+}
+#about{
+    width: 94vw; height: 100vh; border: none;
+}
 
 /* Media query to show the bottom menu on mobile devices */
 @media (max-width: 768px) {
   #bottom-menu {
     display: none;
-    background-color: #1C5796;
     position: fixed;
-    top: 93vh;
+    top: 0;
     height: 6vh;
     width: 100%;
     z-index: 1000;
     display: flex;
     justify-content: space-around;
-    padding: 10px 0;
+    padding-top: 1vh;
       display: flex;
       flex-direction: row;
       align-content: center;
   }
-
+  #about{
+    width: 100vw; height: 94vh; border: none;
+}
   #bottom-menu .icon {
     display:block;
     color: white; /* Adjust icon color as needed */
@@ -425,7 +439,7 @@ html, body {
     background-color: #A52747; /* Color for home page */
   }
   
-  .bottom-menu-map {
+  .bottom-menu-maps {
     background-color: #6f518a; /* Color for about page */
   }
   .bottom-menu-about {

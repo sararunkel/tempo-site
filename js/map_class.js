@@ -56,7 +56,6 @@ class MapInitializer {
                             return f;
                         }
                     });
-                    console.log(targetFeature)
                     if (targetFeature) {
                         const coordinates = targetFeature.geometry.coordinates.slice();
                         const bounds = new mapboxgl.LngLatBounds();
@@ -205,6 +204,18 @@ class MapInitializer {
         });
         this.map.on('mousemove', 'tract-layer', (e) => {
             this.map.getCanvas().style.cursor = 'pointer';
+            if (e.features.length > 0) {
+                this.TRACT = e.features[0].properties.tract;
+
+                this.POC = e.features[0].properties.PercentPOC;
+                this.income = e.features[0].properties.MedianIncome;
+                this.age = e.features[0].properties.MedianAge;
+                this.poverty = e.features[0].properties.PercentPoverty;
+                const FIPSValue = e.features[0].properties.FIPS;
+                
+
+                
+            }
 
             if (e.features.length > 0) {
             if (this.hoveredStateId !== null) {
@@ -238,20 +249,6 @@ class MapInitializer {
 
             
         });
-        this.map.on('mousemove', 'tract-layer', (e) => {
-                if (e.features.length > 0) {
-                    this.TRACT = e.features[0].properties.tract;
-
-                    this.POC = e.features[0].properties.PercentPOC;
-                    this.income = e.features[0].properties.MedianIncome;
-                    this.age = e.features[0].properties.MedianAge;
-                    this.poverty = e.features[0].properties.PercentPoverty;
-                    const FIPSValue = e.features[0].properties.FIPS;
-                    
-
-                    
-                }
-            });
             this.map.on('click', 'tract-layer', (e) => {
                 if (e.features.length > 0) {
                 const FIPSValue = e.features[0].properties.FIPS;

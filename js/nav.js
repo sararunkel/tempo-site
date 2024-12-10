@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const iconPage2 = document.getElementById('icon-page2');
     const iconPage1 = document.getElementById('icon-page1');
     const textileIframe = document.getElementById('textile-iframe');
+    const bottomMenu = document.getElementById('bottom-menu');
     let scrollTimeout;
 
     iconSection.addEventListener('scroll', function() {
@@ -41,16 +42,32 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
-        const bottomMenu = document.getElementById('bottom-menu');
-        const currentPage = window.location.pathname;
+function updateBottomMenuClasses() {
+    const currentPage = window.location.pathname + window.location.hash;
+    console.log(currentPage)
+    if (currentPage.includes('#t2')) {
+        bottomMenu.classList.remove('bottom-menu-about');
+        bottomMenu.classList.remove('bottom-menu-maps');
+        //remove all class lists except for the bottom-menu-home
+        bottomMenu.classList.add('bottom-menu-home');
+    } else if (currentPage.includes('#t3')) {
+        bottomMenu.classList.remove('bottom-menu-home');
+        bottomMenu.classList.remove('bottom-menu-about');
+        bottomMenu.classList.add('bottom-menu-maps');
+    } else if (currentPage.includes('#t5')) {
+        bottomMenu.classList.remove('bottom-menu-home');
+        bottomMenu.classList.remove('bottom-menu-maps');
+        bottomMenu.classList.add('bottom-menu-about');
+    }
+}
 
-        if (currentPage.includes('#t2')) {
-            bottomMenu.classList.add('bottom-menu-home');
-        } else if (currentPage.includes('t3')) {
-            bottomMenu.classList.add('bottom-menu-maps');
-        } else if (currentPage.includes('about')) {
-            bottomMenu.classList.add('bottom-menu-about');
-        }
+updateBottomMenuClasses();
+window.addEventListener('hashchange', function() {
+    updateBottomMenuClasses();
+});
 
+bottomMenu.addEventListener('click', function() {
+    updateBottomMenuClasses();
+});
 });
 

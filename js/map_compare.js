@@ -243,3 +243,24 @@ window.onclick = function(event) {
         document.getElementById('info-popup').style.display = 'none';
     }
 }
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileConsole = document.getElementById('mobile-console');
+    let startY;
+
+    mobileConsole.addEventListener('touchstart', (e) => {
+        startY = e.touches[0].clientY;
+    });
+
+    mobileConsole.addEventListener('touchmove', (e) => {
+        const currentY = e.touches[0].clientY;
+        const diffY = startY - currentY;
+
+        if (diffY > 50) { // Swipe up threshold
+            mobileConsole.classList.add('hidden');
+        }
+    });
+
+    mobileConsole.addEventListener('touchend', () => {
+        startY = null;
+    });
+});

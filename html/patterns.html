@@ -25,14 +25,13 @@
             background-color: rgba(255,255,255,0.95);
         }
         .container {
-            height: 100vh;
+            height: 100%;
             scroll-snap-type: y mandatory;
             overflow-y: scroll;
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 96vw;
-            margin:2vw;
+            width: 100vw;
             overflow-x:hidden
         }
         .mobile-logo img {
@@ -54,7 +53,7 @@
         .section.welcome {
             flex-direction:column;
             text-align:center;
-            padding: 20px;
+            padding: 1vh;
         }
         .section:nth-child(odd) {
             background-color: transparent;
@@ -167,7 +166,7 @@ canvas{
 }
 #knit-section{
     height: auto;
-    width: 80%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -175,7 +174,8 @@ canvas{
     color: #1c5796;
 }
 #label-knit{
-    font-size: 2.5vw;
+    font-size: 1em;
+    font-weight: 800;
     padding:0;
     margin:0;
 }
@@ -183,8 +183,9 @@ canvas{
     .team-members {
         grid-template-columns: 1fr;
     }
+
     .mobile-logo{
-        background-color: #1C5796;
+        background-color: #A52747;
         display:block;
         height: 20vh;
         width: auto;
@@ -194,7 +195,10 @@ canvas{
     #mobile-sec{
         height: 20vh;
         width:100%;
-        background-color: #1C5796;
+        background-color: #A52747;
+    }
+    #knit-section{
+        width: 100%;
     }
 }
         
@@ -244,7 +248,7 @@ canvas{
         <div class="section" id="knit-section">
             <h2 id="label-knit">Census Tract 9802; Denver County; Colorado
             </h2>
-            <p style="font-size:2vw; margin:0">Click on knitting pattern to change the data in the map to that month and time.</p>
+            <p style="font: size 2em; margin:0">Click on knitting pattern to change the data in the map to that month and time.</p>
             <div id="knit-pattern-container" ></div>
         </div>
 

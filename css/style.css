@@ -234,8 +234,8 @@ p {
 
 #overlay-text {
     position: absolute;
-    top: 10px; /* Adjust as needed */
-    left: 10px; /* Adjust as needed */
+    top: 1vh; /* Adjust as needed */
+    left: 1vw; /* Adjust as needed */
     background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
     padding: 10px;
     border-radius: 5px;
@@ -245,12 +245,21 @@ p {
 
 #overlay-text h2 {
     margin: 0;
-    font-size: 3vw; /* Adjust as needed */
+    font-size: 4vw/2; /* Adjust as needed */
     color: #333; /* Adjust as needed */
 }
 
 #overlay-text p {
-    font: 2vw/2 'Inter', sans-serif; /* Adjust as needed */
+    font: 3vw/1 'Inter', sans-serif; /* Adjust as needed */
     margin: 5px 0 0;
     color: #666; /* Adjust as needed */
+}
+@media (max-width: 768px) {
+
+    #overlay-text {
+        top: 1vh;
+        left:0;
+        margin:0;
+        width: 95%;
+    }
 }

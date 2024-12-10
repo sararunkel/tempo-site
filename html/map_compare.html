@@ -34,47 +34,11 @@
 
 
 </nav>
-<div id="draggable-div" class="draggable">
-<div class="slider-container">
-  <div class="selector-container"id="select-maps">
-    <h3 class ='select-map-heading'>Select Map</h3>
-  <div class="toggle" >
-    <input type="radio" id="leftMap" name="mapSelector" value="left" checked>
-    <label for="leftMap" class="button">Left Map</label>
-    <input type="radio" id="rightMap" name="mapSelector" value="right">
-    <label for="rightMap" class="button">Right Map</label>
-</div>
 
-<div class="DateTime-container">
-  <div id="before-label" class="map-label">Jan 8 AM</div>
-  <div id="after-label" class="map-label"> Jan 3 PM</div>
-</div>
-</div>
-  <!-- add label for slider -->
-  <label for="month-slider">Month</label>
-  <div id="month-slider"></div>
-  <label for="time-slider">Time (MST)</label>
-  <div id="time-slider"></div>
-  <div id="census-dropdown-container" style="display:none">
-    <label for="census-variable">Select Variable:</label>
-    <select id="census-variable">
-        <option value="TotalPop">Total Population</option>
-        <option value="MedianIncome">Median Income</option>
-        <option value="MedianAge">Median Age</option>
-        <option value="PercentPoverty">% Below Poverty</option>
-        <option value="PercentPOC">% People of Color</option>
-    </select>
-  </div>
-
-
-
-
-
-</div>
-</div>
 <div id="console-button" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
   <i class="fas fa-times"></i>
 </div>
+<div id="mobile-console">
 <div id="console">
   
   <div class="console-content">
@@ -178,6 +142,45 @@
     <p class="source"><strong>Source:</strong><em> <a href="https://tempo.si.edu/data_for_public.html">TEMPO</a></em> 0.01&#176; regridded data from 2024</p>
 
 </div> -->
+</div>
+<div id="draggable-div" class="draggable">
+  <div class="slider-container">
+    <div class="selector-container"id="select-maps">
+      <h3 class ='select-map-heading'>Select Map</h3>
+    <div class="toggle" >
+      <input type="radio" id="leftMap" name="mapSelector" value="left" checked>
+      <label for="leftMap" class="button">Left Map</label>
+      <input type="radio" id="rightMap" name="mapSelector" value="right">
+      <label for="rightMap" class="button">Right Map</label>
+  </div>
+  
+  <div class="DateTime-container">
+    <div id="before-label" class="map-label">Jan 8 AM</div>
+    <div id="after-label" class="map-label"> Jan 3 PM</div>
+  </div>
+  </div>
+    <!-- add label for slider -->
+    <label for="month-slider">Month</label>
+    <div id="month-slider"></div>
+    <label for="time-slider">Time (MST)</label>
+    <div id="time-slider"></div>
+    <div id="census-dropdown-container" style="display:none">
+      <label for="census-variable">Select Variable:</label>
+      <select id="census-variable">
+          <option value="TotalPop">Total Population</option>
+          <option value="MedianIncome">Median Income</option>
+          <option value="MedianAge">Median Age</option>
+          <option value="PercentPoverty">% Below Poverty</option>
+          <option value="PercentPOC">% People of Color</option>
+      </select>
+    </div>
+  
+  
+  
+  
+  
+  </div>
+  </div>
 </div>
   <script src="../js/constants.js"></script>
   <script src="../js/map_class.js"></script>
