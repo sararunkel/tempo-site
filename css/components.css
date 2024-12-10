@@ -254,7 +254,8 @@
 #console-button.visible {
     opacity: 1;
 }
-
+#mobile-datetime{
+    display:none;}
 .console-close {
     position: absolute;
     top: 5px;
@@ -276,7 +277,7 @@
 
 @media (max-width: 768px) {
     #console {
-        top:0;
+        top:1vh;
         width:100vw;
         height:auto;
         border-radius: 0;
@@ -305,7 +306,8 @@
         z-index: 1000;
 }
 #mobile-datetime{
-    display:bock;
+    display:flex;
+    flex-direction: row;
     width:94vw;
     right:0;
     top:0

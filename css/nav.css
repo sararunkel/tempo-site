@@ -214,13 +214,20 @@ html, body {
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.2);
   }
-  #menu .icon {
+  #menu .icon{
     margin: 5vw 1vw;
     transition: all .5s ease-out !important;
     -webkit-transition: all .5s ease-out !important;
     -moz-transition: all .5s ease-out !important;
     -o-transition: all .5s ease-out !important;
     -ms-transition: all .5s ease-out !important;
+}
+#bottom-menu .icon {
+  transition: all .5s ease-out !important;
+  -webkit-transition: all .5s ease-out !important;
+  -moz-transition: all .5s ease-out !important;
+  -o-transition: all .5s ease-out !important;
+  -ms-transition: all .5s ease-out !important;
 }
   
   a {
