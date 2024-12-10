@@ -32,22 +32,14 @@
   <div id="after" class="map"></div>
 </div>
 
-<div id="census-dropdown-container" style="display: none;">
-  <label for="census-variable">Select Variable:</label>
-  <select id="census-variable">
-      <option value="TotalPop">Total Population</option>
-      <option value="MedianIncome">Median Income</option>
-      <option value="MedianAge">Median Age</option>
-      <option value="PercentPoverty">% Below Poverty</option>
-      <option value="PercentPOC">% People of Color</option>
-  </select>
-</div>
+
 </nav>
 <div id="draggable-div" class="draggable">
 <div class="slider-container">
   <div class="selector-container">
     <h3 class ='select-map-heading'>Select Map</h3>
   <div class="toggle">
+    
     <input type="radio" id="leftMap" name="mapSelector" value="left" checked>
     <label for="leftMap" class="button">Left Map</label>
     <input type="radio" id="rightMap" name="mapSelector" value="right">
@@ -64,6 +56,16 @@
   <div id="month-slider"></div>
   <label for="time-slider">Time (MST)</label>
   <div id="time-slider"></div>
+  <div id="census-dropdown-container" style="display:none">
+    <label for="census-variable">Select Variable:</label>
+    <select id="census-variable">
+        <option value="TotalPop">Total Population</option>
+        <option value="MedianIncome">Median Income</option>
+        <option value="MedianAge">Median Age</option>
+        <option value="PercentPoverty">% Below Poverty</option>
+        <option value="PercentPOC">% People of Color</option>
+    </select>
+  </div>
 
 
 
@@ -104,8 +106,8 @@
             <div class="tick-mark" style="left: 85.74%;"></div>
             <div class="tick-mark guideline" style="left: 100%;"></div>
           </div>
-          <div class="census-legend-container">
-            <p class="legend-label">Percent People of Color</p>
+          <div class="census-legend-container" id = 'census-colors'>
+            <p class="legend-label" >Percent People of Color</p>
             <div class="map-legend">
               <div class="map-legend-bar">
                 <div class="census-legend-gradient" style="background: linear-gradient(to right, #F2EBF7 0%, #E3D8EB 14.29%, #D4C7DF 28.58%, #B4A0CA 42.87%, #9B7CB5 57.16%, #6f518a 71.45%, #523d6f 85.74%); height: 8px;"></div>
@@ -146,6 +148,7 @@
 
 </div>
 <nav id="listing-group" class="listing-group">
+  <div class="item">
   <div class="checkbox-container">
     <input type="checkbox" id="roadways">
     <label for="roadways">include roadways</label>
@@ -157,13 +160,25 @@
 </nav>
 
 </div>
-<!-- TODO: add info icon to bottom right. Create full screen pop=up with info uppon user click -->
-<div id="explain">
+<div id="info-popup" class="info-popup" style="display: block;">
+  <div class="info-popup-content">
+    <span class="close">&times;</span>
+    <h2>Information</h2>
+    <p>This application allows you to compare NO<sub>2</sub> levels between different times and dates. Use the sliders to adjust the time and date, and select the map to update. To compare with census data, check 'Include Census Data'. Hover over the map for exact values.</p>
+    <hr>
+    <p class="source"><strong>Source:</strong><em> <a href="https://tempo.si.edu/data_for_public.html">TEMPO</a></em> 0.01&#176; regridded data from 2024</p>
+  </div>
+</div>
+<!-- TODO: add info icon to bottom right. Create full screen pop-up with info upon user click -->
+<div id="info-button" style="position: fixed; bottom: 20px; right: 60px; z-index: 1000; cursor:pointer">
+  <i class="fas fa-info-circle"></i>
+</div>
+<!-- <div id="explain">
     <p align="justify" style="padding-left: 4px;color:rgba(71,71,71,1.00)">Use the sliders to select the month and time to compare NO<sub>2</sub> levels. You can choose to change the data on either the left or right map. Hover over the map for exact values.</p>
     <hr>
     <p class="source"><strong>Source:</strong><em> <a href="https://tempo.si.edu/data_for_public.html">TEMPO</a></em> 0.01&#176; regridded data from 2024</p>
 
-</div>
+</div> -->
 </div>
   <script src="../js/constants.js"></script>
   <script src="../js/map_class.js"></script>

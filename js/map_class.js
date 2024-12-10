@@ -91,23 +91,23 @@ class MapInitializer {
             mapboxgl: mapboxgl,
             placeholder: 'Enter your address'
         });
-        this.map.addControl(new mapboxgl.NavigationControl());
+        this.map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
         this.map.addControl(geocoder);
 
             // Add search icon for mobile devices
-            const searchIcon = document.createElement('div');
-            searchIcon.className = 'search-icon';
-            searchIcon.innerHTML = '<i class="fas fa-search"></i>';
-            document.body.appendChild(searchIcon);
-            searchIcon.style.position = 'fixed';
-            searchIcon.style.right = '10vw';
-            searchIcon.style.top = '2vw';
-            searchIcon.style.zIndex = '1';
+            // const searchIcon = document.createElement('div');
+            // searchIcon.className = 'search-icon';
+            // searchIcon.innerHTML = '<i class="fas fa-search"></i>';
+            // document.body.appendChild(searchIcon);
+            // searchIcon.style.position = 'fixed';
+            // searchIcon.style.right = '10vw';
+            // searchIcon.style.top = '2vw';
+            // searchIcon.style.zIndex = '1';
     
-            // Toggle search bar visibility on icon click
-            searchIcon.addEventListener('click', () => {
-                document.body.classList.toggle('show-search');
-            });
+            // // Toggle search bar visibility on icon click
+            // searchIcon.addEventListener('click', () => {
+            //     document.body.classList.toggle('show-search');
+            // });
 
     }
 

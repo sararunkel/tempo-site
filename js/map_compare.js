@@ -82,13 +82,16 @@ function updateCompareInstance(before, after) {
 document.getElementById('census').addEventListener('change', function() {
     const dropdownContainer = document.getElementById('census-dropdown-container');
     const selectorContainer = document.querySelector('.selector-container');
+    const legendContainer = document.getElementById('#census-colors');
     if (this.checked) {
         console.log('Using census dat')
         dropdownContainer.style.display = 'block';
         selectorContainer.classList.add('hidden');
+        legendContainer.style.display = 'block';
         document.querySelector('input[name="mapSelector"][value="left"]').checked = true;
     } else {
         dropdownContainer.style.display = 'none';
+        legendContainer.style.display = 'none';
         selectorContainer.classList.remove('hidden');
     }
 });
@@ -150,7 +153,7 @@ document.getElementById('census').addEventListener('change', (e) => {
         });
         function positionDraggableDiv() {
             const consoleHeight = console.offsetHeight;
-            draggableDiv.style.top = (consoleHeight + 10) + 'px';
+            draggableDiv.style.top = (consoleHeight + 50) + 'px';
         }
         positionDraggableDiv();
         consoleButton.addEventListener('click', () => {
@@ -226,3 +229,19 @@ document.getElementById('census').addEventListener('change', (e) => {
         });
     });
     
+
+///INFO POPUP
+
+document.getElementById('info-button').onclick = function() {
+    document.getElementById('info-popup').style.display = 'block';
+}
+
+document.querySelector('.info-popup .close').onclick = function() {
+    document.getElementById('info-popup').style.display = 'none';
+}
+
+window.onclick = function(event) {
+    if (event.target == document.getElementById('info-popup')) {
+        document.getElementById('info-popup').style.display = 'none';
+    }
+}

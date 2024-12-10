@@ -365,10 +365,10 @@ html, body {
 
     /* Hide navbar on mobile */
     img#uno {
-        width:50px
+        width:5vw
       }
       li#oneicon.icon{
-        margin:8px 0px
+        margin:0px 0px
       }
       #menu {
         /* background-color: rgb(102,51,153,0.3); */
@@ -387,4 +387,43 @@ html, body {
         width:100%;
     }
 
+}/* Default styles for the bottom menu (hidden by default) */
+#bottom-menu {
+  top:120vh;
+}
+
+/* Style for the icons in the bottom menu */
+#bottom-menu .icon {
+  display:none;
+  color: white; /* Adjust icon color as needed */
+  font-size: 4vh; /* Adjust icon size as needed */
+}
+
+/* Media query to show the bottom menu on mobile devices */
+@media (max-width: 768px) {
+  #bottom-menu {
+    display: none;
+    background-color: #1C5796;
+    position: fixed;
+    top: 94vh;
+    height: 6vh;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+  }
+
+  #bottom-menu .icon {
+    display:block;
+    color: white; /* Adjust icon color as needed */
+  }
+
+  /* Hide the existing menu on mobile devices */
+  #menu {
+      display: none;
+  }
 }

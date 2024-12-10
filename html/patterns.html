@@ -35,7 +35,7 @@
             margin:2vw;
         }
         .mobile-logo img {
-            height: 30vw;
+            height: 20vh;
             filter: invert(1);
         }
         .section {
@@ -164,11 +164,17 @@ canvas{
         grid-template-columns: 1fr;
     }
     .mobile-logo{
+        background-color: #1C5796;
         display:block;
-        height: 20%;
+        height: 20vh;
         width: auto;
         padding:0;
         margin:0;
+    }
+    #mobile-sec{
+        height: 20vh;
+        width:100%;
+        background-color: #1C5796;
     }
 }
         
@@ -177,8 +183,10 @@ canvas{
 <body>
     <div class="container">
         <!-- Logo -->
+        <div class="section" id="mobile-sec">
         <div class="mobile-logo">
             <img src="../images/full_logo.png" alt="ClimateThreads Logo">
+        </div>
         </div>
 
         <!-- Section 1 -->

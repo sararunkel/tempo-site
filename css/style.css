@@ -93,7 +93,7 @@ body * {
     width: 100%;
 }
 label {
-    font: 2vw/2.5 'Inter', sans-serif;
+    font: 1.5vh/1.5 'Inter', sans-serif;
     font-weight: 400;
     color: black;
 }
@@ -137,7 +137,7 @@ p {
     font: 12px/20px 'Inter', sans-serif;
 }
 .listing-group {
-    font: 12px/20px 'Inter', sans-serif;
+    font: 1vh/1 'Inter', sans-serif;
     font-weight: 400;
     z-index: 1;
     border:none;
@@ -213,15 +213,15 @@ p {
     position: absolute;
     width:fit-content;
     height:fit-content;
-    padding:6px;
-    margin:6px;
+    padding:1vh;
+    margin:1vh;
     border-radius: 2px;
-    top: 10px;
-    left: 10px;
+    top: 1vh;
+    left: 1vh;
     z-index: 1000;
     background-color: rgba(255, 255, 255, 0.8);
     border: none;
-    font-size: 1em;
+    font-size: 3vh;
     cursor: pointer;
     font-size: 1em;
     cursor: pointer;
