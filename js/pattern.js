@@ -274,14 +274,6 @@ window.addEventListener('resize', () => {
 // Call it initially to set the correct size
 //resizeContainer();
 
-// Fetch the CSV file on page load
-fetchCSVFile('../data/monthly/filtered_data_with_colors.csv').then(() => {
-    //get data-value from infoDiv
-    const newFIPS = 8035014116;
-    updateFilteredColorsDict(newFIPS);
-    drawPattern(); // Draw the pattern after fetching the CSV file
-});
-
 let debounceTimeout;
 function debounceDrawPattern(newFIPS, delay) {
     clearTimeout(debounceTimeout);
