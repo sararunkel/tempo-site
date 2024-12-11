@@ -20,11 +20,76 @@
 <link rel="stylesheet" href="../css/components.css">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
+<style>
+  .map-legend-bar {
+    display: flex;
+}
+
+.map-legend-segment {
+    height: 8px;
+}
+#overlay-text h2 {
+  font-size: 1em;}
+#overlay-text p {
+  font-size: 0.8em;
+}
+#legend {
+  position: absolute;
+  bottom: 6vh;
+  left: 1vw;
+  width: 60%;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding-bottom:35px;
+  border-radius:5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.tick-text{
+  font-size:0.8em;
+}
+.legend-label {
+  font-size: 0.4em;
+  margin:0;
+  padding:0;
+}
+</style>
 <body>
     <div id="displaymap" class="map"></div>
     <div id="overlay-text">
       <h2 id="map-title">Average NO<sub>2</sub> at 8 AM in January, 2024</h2>
       <p id="map-description" style="margin:0">Click on a census tract to generate a knitting pattern of your air quality throughout the year.</p>
+  </div>
+  <div id="legend" >
+    <p class="legend-label">NO<sub>2</sub> (<em>10</em><sup>15</sup><em>molec/cm</em><sup>2</sup>)</p>
+    <div class="map-legend">
+      <div class="map-legend-bar">
+        <div class="map-legend-segment" style="background-color: #0052a9; width: 14.29%; height: 8px;"></div>
+        <div class="map-legend-segment" style="background-color: #4bccff; width: 14.29%; height: 8px;"></div>
+        <div class="map-legend-segment" style="background-color: #a9ffd4; width: 14.29%; height: 8px;"></div>
+        <div class="map-legend-segment" style="background-color: #fcfccd; width: 14.29%; height: 8px;"></div>
+        <div class="map-legend-segment" style="background-color: #ffa646; width: 14.29%; height: 8px;"></div>
+        <div class="map-legend-segment" style="background-color: #d05134; width: 14.29%; height: 8px;"></div>
+        <div class="map-legend-segment" style="background-color: #75001d; width: 14.29%; height: 8px;"></div>
+    </div>
+    <div class="tick-text" style="left: 0%;">0</div>
+    <div class="tick-text" style="left: 14.29%;">1</div>
+    <div class="tick-text" style="left: 28.58%;">2</div>
+    <div class="tick-text guideline" style="left: 42.87%;"><span class="tick-text-two-line">3</span></div>
+    <div class="tick-text" style="left: 57.26%;">4</div>
+    <div class="tick-text" style="left: 71.45%;">5</div>
+    <div class="tick-text" style="left: 85.74%;">6</div>
+    <div class="tick-text guideline" style="left: 100%;"><span class="tick-text-two-line">7+</div>
+    <div class="tick-mark" style="left: 0%;"></div>
+    <div class="tick-mark" style="left: 14.29%;"></div>
+    <div class="tick-mark" style="left: 28.58%;"></div>
+    <div class="tick-mark guideline" style="left: 42.87%;"></div>
+    <div class="tick-mark" style="left: 57.16%;"></div>
+    <div class="tick-mark" style="left: 71.45%;"></div>
+    <div class="tick-mark" style="left: 85.74%;"></div>
+    <div class="tick-mark guideline" style="left: 100%;"></div>
+  </div>
   </div>
     <script src="../js/constants.js"></script>
     <script src="../js/map_class.js"></script>
