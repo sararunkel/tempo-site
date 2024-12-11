@@ -307,20 +307,33 @@ window.addEventListener('message', (event) => {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Get the URL parameters from the main page
-    const urlParams = new URLSearchParams(window.parent.location.search);
-    const fips = urlParams.get('FIPS');
-
+    // Get the URL parameters from the main page, including the hash
+    const urlParams = new URLSearchParams(window.parent.location.search + window.parent.location.hash); const fips = urlParams.get('FIPS');
+    fetchCSVFile('../data/monthly/filtered_data_with_colors.csv').then(() => {
+        //get data-value from infoDiv
     if (fips === '8031980200') {
         document.getElementById('section-8031980200').style.display = 'block';
         document.getElementById('section-8013012206').style.display = 'none';
+        const newFIPS = 8031980200;
+        updateFilteredColorsDict(newFIPS);
+        drawPattern();
     } else if (fips === '8013012206') {
         document.getElementById('section-8031980200').style.display = 'none';
         document.getElementById('section-8013012206').style.display = 'block';
         document.getElementById('label-knit').textContent='Census Tract 122.06; Boulder County; Colorado'
+        const newFIPS = 8013012206;
+        updateFilteredColorsDict(newFIPS);
+        drawPattern();
+        
+        
     } else {
         // Default behavior if no FIPS parameter is provided
         document.getElementById('section-8031980200').style.display = 'block';
         document.getElementById('section-8013012206').style.display = 'none';
+        const newFIPS = 8031980200;
+        updateFilteredColorsDict(newFIPS);
+        drawPattern();
+        console.log(newFIPS)
     }
+});
 });
