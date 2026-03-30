@@ -36,7 +36,7 @@
 </nav>
 
 <div id="console-button" >
-  <div id=console-button-icon><i class="fas fa-times"></i></div>
+  <div id=console-button-icon><i class="fas fa-minus"></i></div>
   <div class="DateTime-container" id="mobile-datetime">
     <div id="before-label" class="map-label">Jan 8 AM</div>
     <div id="after-label" class="map-label"> Jan 3 PM</div>
@@ -163,13 +163,14 @@
     <div id="after-label" class="map-label"> Jan 3 PM</div>
   </div>
   </div>
+    <div id="left-map-header" class="map-section-header" style="display:none">Left Map</div>
     <!-- add label for slider -->
     <label for="month-slider">Month</label>
     <div id="month-slider"></div>
     <label for="time-slider">Time (MST)</label>
     <div id="time-slider"></div>
     <div id="census-dropdown-container" style="display:none">
-      <label for="census-variable">Select Variable:</label>
+      <div class="map-section-header">Right Map</div>
       <select id="census-variable">
           <option value="TotalPop">Total Population</option>
           <option value="MedianIncome">Median Income</option>

@@ -84,15 +84,17 @@ function updateCompareInstance(before, after) {
 document.getElementById('census').addEventListener('change', function() {
     const dropdownContainer = document.getElementById('census-dropdown-container');
     const selectorContainer = document.querySelector('#select-maps');
-    const legendContainer = document.getElementById('#census-colors');
+    const leftMapHeader = document.getElementById('left-map-header');
     if (this.checked) {
         console.log('Using census dat')
         dropdownContainer.style.display = 'block';
         selectorContainer.style.display = 'none';
+        leftMapHeader.style.display = 'block';
         document.querySelector('input[name="mapSelector"][value="left"]').checked = true;
     } else {
         dropdownContainer.style.display = 'none';
         selectorContainer.style.display = 'block';
+        leftMapHeader.style.display = 'none';
     }
 });
 
@@ -142,35 +144,29 @@ document.getElementById('census').addEventListener('change', (e) => {
         const sliderContainer = draggableDiv.querySelector('.slider-container');
         const consoleContent = document.querySelector('.console-content');
         const console = document.getElementById('console');
-        consoleButton.addEventListener('click', () => {
-            if (sliderContainer.classList.contains('hidden')) {
-                sliderContainer.classList.remove('hidden');
-            } else {
-                sliderContainer.classList.add('hidden');
-                consoleButton.innerHTML = '<i class="fas fa-plus"></i>'; 
-            }
-        });
         function positionDraggableDiv() {
             const consoleHeight = console.offsetHeight;
             draggableDiv.style.top = (consoleHeight) + 'px';
         }
         positionDraggableDiv();
         consoleButton.addEventListener('click', () => {
-            if (console.classList.contains('console-collapsed')) {
-                console.style.display='block';
+            if (console.classList.contains('panel-collapsed')) {
+                console.style.display = 'block';
                 draggableDiv.style.display = 'block';
-                
-                console.classList.remove('console-collapsed');
-                console.classList.add('console-expanded');
-                consoleButton.innerHTML = '<i class="fas fa-times"></i>';
+                requestAnimationFrame(() => {
+                    console.classList.remove('panel-collapsed');
+                    draggableDiv.classList.remove('panel-collapsed');
+                });
+                consoleButton.innerHTML = '<i class="fas fa-minus"></i>';
             } else {
-                console.classList.remove('console-expanded');
-                console.classList.add('console-collapsed');
-                console.style.display = 'none';
-                draggableDiv.style.display = 'none';
+                console.classList.add('panel-collapsed');
+                draggableDiv.classList.add('panel-collapsed');
+                setTimeout(() => {
+                    console.style.display = 'none';
+                    draggableDiv.style.display = 'none';
+                }, 250);
                 consoleButton.innerHTML = '<i class="fas fa-window-maximize"></i>';
             }
-            consoleContent.style.display = consoleContent.style.display === 'none' ? 'block' : 'none';
         });
         //TODO: add sequential instructions for the map settings so the user first selects map, then month then hour. 
         //Then the date and time will update 

@@ -62,6 +62,37 @@
     border-radius: 15px;
     background-color: #f9920b;
   } */
+.map-section-header {
+    background-color: #6f518a;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 5px 8px;
+    border-radius: 4px;
+    margin: 8px 0 4px 0;
+    width: 90%;
+}
+
+#census-variable {
+    width: 90%;
+    padding: 6px 8px;
+    border: 1px solid #6f518a;
+    border-radius: 4px;
+    font-family: 'Inter', 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: #333;
+    background-color: white;
+    cursor: pointer;
+    margin-top: 6px;
+    display: block;
+}
+
+#census-variable:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(111, 81, 138, 0.2);
+}
+
 .DateTime-container {
     display: flex;
     flex-direction: row;
@@ -83,15 +114,17 @@
     position: absolute;
     box-shadow: inset 0 0 0 2px #fff;
     display:flex;
-    top: 0;
+    top: 10px;
+    left: 52px;
     flex-direction: column;
-    width: fit-content;
+    width: 300px;
     height: fit-content;
-    padding: 3vh;
+    padding: 10px;
     background-color: white;
     overflow-y: auto;
     border-radius: 5px;
     box-sizing: border-box;
+    font-family: 'DM Sans', 'Inter', sans-serif;
 }
 .selector-container.hidden {
     display: none;
@@ -107,23 +140,10 @@
     transition: height 0.3s ease;
     border:none;
 }
-#console-collapsed 
-{
-    display:none
-}
-#console-expanded{
-    display:block
-}
-.console-collapsed .console-content {
-    display:none;
-    height: 0;
-    padding: 0;
-}
-
-.console-expanded .console-content {
-    display:block;
-    height: fit-content;
-    padding: 0; /* Adjust padding as needed */
+.panel-collapsed {
+    opacity: 0 !important;
+    transform: translateY(-6px) !important;
+    pointer-events: none !important;
 }
 
 .console-header {
@@ -152,9 +172,11 @@
     background-color: #ffffff;
     position: absolute;
     top: 75%;
-    left: 10px;
+    left: 52px;
     cursor: move;
     z-index: 1000;
+    font-family: 'DM Sans', 'Inter', sans-serif;
+    box-sizing: border-box;
 }
 .slider-container {
     display: block;
@@ -201,9 +223,10 @@
 }
 .map-legend-container {
     margin-top: 0;
-    margin-left:10px;
     margin-bottom: 55px;
-    width: 84%;
+    width: 100%;
+    padding-right: 25px;
+    box-sizing: border-box;
 }
 .census-legend-container {
     margin-top: 50px;
@@ -251,8 +274,70 @@
     opacity: 0;
 }
 
+/* Panel open/close transitions */
+#console {
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.draggable {
+    transition: opacity 0.25s ease, transform 0.25s ease, top 0.25s ease;
+}
+
+/* Toggle button hover */
+#console-button-icon {
+    transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
+}
+#console-button-icon:hover {
+    background-color: #f5f0f8;
+    box-shadow: 0 2px 6px rgba(111, 81, 138, 0.25);
+    color: #6f518a;
+}
+
+/* Radio button labels */
+.toggle input + label {
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Checkbox labels */
+.checkbox-container label {
+    transition: color 0.15s ease;
+    cursor: pointer;
+}
+.checkbox-container label:hover {
+    color: #6f518a;
+}
+
+/* Census dropdown */
+#census-variable {
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+#census-variable:hover {
+    border-color: #523d6f;
+}
+
+/* Map section header */
+.map-section-header {
+    transition: background-color 0.15s ease;
+}
+
 #console-button.visible {
     opacity: 1;
+}
+
+#console-button-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1001;
+    background: white;
+    border-radius: 4px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    font-size: 14px;
 }
 #mobile-datetime{
     display:none;}
@@ -305,6 +390,18 @@
         cursor: move;
         z-index: 1000;
 }
+    #console {
+        top: 1vh;
+        left: 0;
+    }
+    #console-button-icon {
+        position: static;
+        width: auto;
+        height: auto;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0 8px;
+    }
 #mobile-datetime{
     display:flex;
     flex-direction: row;
