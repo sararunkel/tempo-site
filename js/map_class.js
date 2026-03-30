@@ -49,33 +49,24 @@ class MapInitializer {
             console.log(featureId)
             const features = this.map.queryRenderedFeatures({ layers: ['tract-layer'] });
             if (featureId) {
-                this.map.on('idle', () => {
+                const handleIdle = () => {
                     const features = this.map.queryRenderedFeatures({ layers: ['tract-layer'] });
-
-                    let targetFeature = features.find(f => {
-                        //console.log('Feature Properties:', f);
-                        if (parseInt(f.properties.FIPS) === parseInt(featureId)) {
-                            return f;
-                        }
-                    });
+                    const targetFeature = features.find(f =>
+                        parseInt(f.properties.FIPS) === parseInt(featureId)
+                    );
                     if (targetFeature) {
-                        const coordinates = targetFeature.geometry.coordinates.slice();
+                        this.map.off('idle', handleIdle);
                         const bounds = new mapboxgl.LngLatBounds();
-            
-                        // Calculate the bounding box of the feature
-                        targetFeature.geometry.coordinates[0].forEach((coord)=> {
+                        targetFeature.geometry.coordinates[0].forEach((coord) => {
                             bounds.extend(coord);
                         });
-            
-                        // Use the flyTo method to zoom in on the feature
                         this.map.flyTo({
                             center: bounds.getCenter(),
-                            zoom: 10, // Adjust the zoom level as needed
-                            speed: 2, // Adjust the speed of the zoom
-                            curve: 1, // Adjust the curve of the zoom
+                            zoom: 10,
+                            speed: 2,
+                            curve: 1,
                             easing: (t) => t
                         });
-                        // Set the feature state for the clicked feature
                         if (this.clickedStateId !== null) {
                             this.map.setFeatureState(
                                 { source: 'us-data', id: this.clickedStateId },
@@ -87,10 +78,9 @@ class MapInitializer {
                             { source: 'us-data', id: this.clickedStateId },
                             { clicked: true }
                         );
-                    } else {
-                        console.error('Feature not found.');
                     }
-                });
+                };
+                this.map.on('idle', handleIdle);
             } else {
                 console.log('No feature ID provided in query parameters.');
             }

@@ -148,46 +148,38 @@ p {
     flex-direction: column;
 }
 
-.listing-group input[type='checkbox']:first-child + label {
-    border-radius: 3px 3px 0 0;
-}
-
-.listing-group label:last-child {
-    border-radius: 0 0 3px 3px;
-    border: none;
-}
-
-/* .listing-group input[type='checkbox'] {
-    display: none;
-} */
 .checkbox-container {
     display: flex;
     align-items: center;
-    margin-bottom: 10px; /* Adjust spacing between checkboxes */
+    margin-bottom: 10px;
 }
 
+.listing-group input[type='checkbox'] {
+    display: none;
+}
 
 .listing-group input[type='checkbox'] + label {
-    background-color: white;
     display: block;
     cursor: pointer;
     text-transform: capitalize;
-}
-/* Optional: Style for the checkboxes and labels */
-.checkbox-container input[type="checkbox"]:checked {
-    background-color: #4bccff; /* Change this to your desired color */
-    border-color: #ff4bb7; /* Change this to match the background color */
+    padding-left: 20px;
+    position: relative;
+    transition: color 0.15s ease;
 }
 
-
-.listing-group input[type='checkbox'] + label:hover,
-.listing-group input[type='checkbox']:checked + label {
-    background-color: whitesmoke;
+.listing-group input[type='checkbox'] + label:hover {
+    color: #6f518a;
 }
 
-/* .listing-group input[type='checkbox']:checked + label:before {
-    content: '✔';
-} */
+.listing-group input[type='checkbox']:checked + label::before {
+    content: '\f00c';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    color: #6f518a;
+    font-size: 12px;
+}
 
 .popup-content p {
     margin: 2px 0; /* Adjust the margin as needed */
