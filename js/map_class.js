@@ -19,6 +19,8 @@ class MapInitializer {
         this.income=0;
         this.age=0;
         this.poverty=0;
+        this.clickedStateId = null;
+        this.hoveredStateId = null;
     }
     getQueryParam(param) {
         const urlParams = new URLSearchParams(window.location.search);

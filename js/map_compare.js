@@ -17,8 +17,9 @@ leftMap.initializeMap();
 
 
 rightMap.initializeMap();
+let sliderComponent;
 document.addEventListener('DOMContentLoaded', function() {
-    const sliderComponent = new SliderComponent();
+    sliderComponent = new SliderComponent();
     //get month slider from html
     monthObj= document.getElementById('month-slider').ej2_instances[0];
     rangeObj = document.getElementById('time-slider').ej2_instances[0];
@@ -30,11 +31,12 @@ document.addEventListener('DOMContentLoaded', function() {
 function updateLabels(side) {
     const monthArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const monthLabel = monthArr[monthObj.value - 1];
-    const timeLabel = timeLabels[rangeObj.value - rangeObj.min];
+    const timeLabel = sliderComponent.timeLabels[rangeObj.value - rangeObj.min];
     if (side === 'left') {
-        document.getElementById('before-label').textContent = `${monthLabel} ${timeLabel}`;
+        document.querySelectorAll('[id="before-label"]').forEach(el => el.textContent = `${monthLabel} ${timeLabel}`);
     } else {
-    document.getElementById('after-label').textContent = `${monthLabel} ${timeLabel}`;}
+        document.querySelectorAll('[id="after-label"]').forEach(el => el.textContent = `${monthLabel} ${timeLabel}`);
+    }
 }
 function updateData() {
     let month = document.getElementById('month-slider').ej2_instances[0].value;
@@ -131,7 +133,6 @@ document.getElementById('census').addEventListener('change', (e) => {
         radio.addEventListener('change', function() {
             var selectedMap = document.querySelector('input[name="mapSelector"]:checked').value;
             console.log('Selected map:', selectedMap);
-            // Add your logic here to handle the map selection
         });
     });
      
